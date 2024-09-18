@@ -1,7 +1,7 @@
 """The program starts here. This main function will keep it going."""
 
 from data import prompts, menu_options as mo
-from core import register as rg, login as lg, balance_check as bc
+from core import account
 
 
 def display_menu():
@@ -34,11 +34,38 @@ def handle_input(opt):
         opt (int): will be an option within main menu
     """
     if opt == 1:
-        lg.login()
+        email = input("Enter your email: ")
+        if account.Account.is_new_user(email):
+            print("You do not have an account. Please register")
+        else:
+            password = input("Enter your password: ")
+            account.Account.login_account(email, password)
     elif opt == 2:
-        rg.register()
-    elif opt == 3:
-        bc.balance_check()
+        email = input("Enter your email: ")
+        phone_no = input("Enter your phone no: ")
+        first_name = input("Enter your first name: ")
+        last_name = input("Enter your last name: ")
+        gender = input("Enter your gender: ")
+        password = input("Enter your password: ")
+        initial_deposit = input("Enter your initial deposit: ")
+        account_type = input("Enter your account type: ")
+        date_of_birth = input("Enter your date of birth: ")
+        country = input("Enter your country: ")
+        city = input("Enter your city: ")
+        new_account = account.Account(
+            email,
+            phone_no,
+            first_name,
+            last_name,
+            gender,
+            password,
+            initial_deposit,
+            account_type,
+            date_of_birth,
+            country,
+            city,
+        )
+        new_account.register_account()
 
 
 display_menu()
