@@ -1,7 +1,11 @@
+"""This is the account class that will manage all user accounts"""
+
 from datetime import datetime
 
 
 class Account:
+    """This is the account class that will manage all user accounts"""
+
     user_accounts = {}
 
     def __init__(
@@ -31,47 +35,54 @@ class Account:
         self.country = country
         self.city = city
 
-    def register_account(self):
-        if self.email in Account.user_accounts:
-            print(
-                "Account already exists with this email. Please login using email & password."
-            )
-
-        else:
-            Account.user_accounts.update(
-                {
-                    self.email: {
-                        "first_name": self.first_name,
-                        "last_name": self.last_name,
-                        "gender": self.gender,
-                        "email": self.email,
-                        "phone_no": self.phone_no,
-                        "password": self.password,
-                        "initial_deposit": self.initial_deposit,
-                        "account_type": self.account_type,
-                        "date_created": self.date_created.strftime("%Y-%m-%d %H:%M:%S"),
-                        "date_of_birth": self.date_of_birth,
-                        "country": self.country,
-                        "city": self.city,
-                    }
-                }
-            )
-            print("------Account Registration Successful-----------")
-            self.login_account(self.email, self.password)
-
-    @staticmethod
-    def login_account(email, password):
-        if email in Account.user_accounts:
-            if password != Account.user_accounts[email]["password"]:
-                print("Incorrect password")
-            else:
-                print("----------Logging In-------------")
-                print(Account.user_accounts)
-        else:
-            print("Account not found with this email. Please register an account")
-
-    @staticmethod
-    def is_new_user(email):
-        if email in Account.user_accounts:
+    def register_user(self):
+        if Account.is_old_user(self.email):
             return False
+        Account.user_accounts.update(
+            {
+                self.email: {
+                    "first_name": self.first_name,
+                    "last_name": self.last_name,
+                    "gender": self.gender,
+                    "email": self.email,
+                    "phone_no": self.phone_no,
+                    "password": self.password,
+                    "initial_deposit": self.initial_deposit,
+                    "account_type": self.account_type,
+                    "date_created": self.date_created.strftime("%Y-%m-%d %H:%M:%S"),
+                    "date_of_birth": self.date_of_birth,
+                    "country": self.country,
+                    "city": self.city,
+                }
+            }
+        )
         return True
+
+    @staticmethod
+    def is_old_user(email):
+        if email in Account.user_accounts:
+            return True
+        return False
+
+    @staticmethod
+    def login_user(email, password):
+        if (
+            email in Account.user_accounts
+            and Account.user_accounts[email]["password"] == password
+        ):
+            return True
+        if email not in Account.user_accounts:
+            return False
+
+    def __str__(self):
+        return f"Account for {self.first_name} {self.last_name} ({self.email})"
+
+    def __repr__(self):
+        return (
+            f"Account(email={self.email}, phone_no={self.phone_no}, "
+            f"name={self.first_name} {self.last_name}, "
+            f"gender={self.gender}, initial_deposit={self.initial_deposit}, "
+            f"account_type={self.account_type}, "
+            f"date_of_birth={self.date_of_birth}, country={self.country}, "
+            f"city={self.city})"
+        )
