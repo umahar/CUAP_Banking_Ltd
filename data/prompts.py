@@ -17,3 +17,11 @@ REGISTER_SUCCESS = f"\n{DASHES}REGISTRATION SUCCESSFUL{DASHES}"
 UNKNOWN_ERROR = (
     f"\n{DASHES}ERROR: An unknown error has occurred. Please contact support.{DASHES}"
 )
+
+INV_EMAIL = f"\n{DASHES}ERROR:Invalid Email. Please enter again{DASHES}"
+INV_PASSWORD = f"\n{DASHES}ERROR:Invalid Password. Please enter again{DASHES}"
+INV_PHONE = f"\n{DASHES}ERROR:Invalid Phone Number. Please enter again{DASHES}"
+INV_DOB = f"\n{DASHES}ERROR:Invalid Date of Birth. Please enter again{DASHES}"
+INV_DEPOSIT = f"\n{DASHES}ERROR:Invalid Deposit Amount. Please enter again{DASHES}"
+INV_GENDER = f"\n{DASHES}ERROR:Invalid Gender. Must be 'Male', 'Female', or 'Other'. Please enter again{DASHES}"
+INV_ACC_TYPE = f"\n{DASHES}ERROR:Invalid Account Type. Must be 'Current', 'Saving', or 'Other'.Please enter again{DASHES}"
