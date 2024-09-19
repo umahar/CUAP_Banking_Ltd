@@ -9,19 +9,17 @@ INVALID_INPUT_TEXT = (
 
 EXIT = f"\n{DASHES}Thanks for using CUAP Banking LTD services. Exiting{DASHES}\n"
 LOGIN_SUCCESS = f"\n{DASHES}LOGIN SUCCESSFUL{DASHES}"
-LOGIN_FAILED = f"\n{DASHES}ERROR: Unknown email/password. Please recheck your email and password{DASHES}"
-REGISTER_FAILED = (
-    f"\n{DASHES}ERROR: An account already exists with that email. Please login{DASHES}"
-)
-REGISTER_SUCCESS = f"\n{DASHES}REGISTRATION SUCCESSFUL{DASHES}"
+LOGIN_FAILED = f"\n{DASHES}ERROR: Unknown email/password. Please recheck your email and password{DASHES}\n"
+REGISTER_FAILED = f"\n{DASHES}ERROR: An account already exists with that email. Please login{DASHES}\n"
+REGISTER_SUCCESS = f"\n{DASHES}REGISTRATION SUCCESSFUL{DASHES}\n"
 UNKNOWN_ERROR = (
-    f"\n{DASHES}ERROR: An unknown error has occurred. Please contact support.{DASHES}"
+    f"\n{DASHES}ERROR: An unknown error has occurred. Please contact support.{DASHES}\n"
 )
 
-INV_EMAIL = f"\n{DASHES}ERROR:Invalid Email. Please enter again{DASHES}"
-INV_PASSWORD = f"\n{DASHES}ERROR:Invalid Password. Please enter again{DASHES}"
-INV_PHONE = f"\n{DASHES}ERROR:Invalid Phone Number. Please enter again{DASHES}"
-INV_DOB = f"\n{DASHES}ERROR:Invalid Date of Birth. Please enter again{DASHES}"
-INV_DEPOSIT = f"\n{DASHES}ERROR:Invalid Deposit Amount. Please enter again{DASHES}"
-INV_GENDER = f"\n{DASHES}ERROR:Invalid Gender. Must be 'Male', 'Female', or 'Other'. Please enter again{DASHES}"
-INV_ACC_TYPE = f"\n{DASHES}ERROR:Invalid Account Type. Must be 'Current', 'Saving', or 'Other'.Please enter again{DASHES}"
+INV_EMAIL = f"\n{DASHES}ERROR:Invalid Email. Please enter again{DASHES}\n"
+INV_PASSWORD = f"\n{DASHES}ERROR:Invalid Password. Please enter again{DASHES}\n"
+INV_PHONE = f"\n{DASHES}ERROR:Invalid Phone Number. Please enter again{DASHES}\n"
+INV_DOB = f"\n{DASHES}ERROR:Invalid Date of Birth. Please enter again{DASHES}\n"
+INV_DEPOSIT = f"\n{DASHES}ERROR:Invalid Deposit Amount. Please enter again{DASHES}\n"
+INV_GENDER = f"\n{DASHES}ERROR:Invalid Gender. Must be 'Male', 'Female', or 'Other'. Please enter again{DASHES}\n"
+INV_ACC_TYPE = f"\n{DASHES}ERROR:Invalid Account Type. Must be 'Current', 'Saving', or 'Other'.Please enter again{DASHES}\n"

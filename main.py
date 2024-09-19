@@ -1,19 +1,20 @@
-from data import prompts, menu_options as mo
+from data import prompts
+from data.menu_options import main_menu_options
 from core.account import Account
 from utils.input_handler import UserInputHandler
 
 
-def get_user_option():
+def get_user_option(options):
     """Display the main menu and get the user's option."""
     print(prompts.WELCOME_TEXT)
     while True:
         print(prompts.MENU_TEXT)
-        for index, item in enumerate(mo.main_menu_options):
+        for index, item in enumerate(options):
             print(f"{index + 1}. {item}")
         opt = input("\nOption #: ")
         if opt.strip().isdigit():
             opt = int(opt)
-            if 0 <= opt <= len(mo.main_menu_options):
+            if 0 <= opt <= len(options):
                 return opt
         print(prompts.INVALID_INPUT_TEXT)
 
@@ -62,6 +63,8 @@ def register_user():
         )
         if new_account.register_user():
             print(prompts.REGISTER_SUCCESS)
+            print("\n------------------------------------\n")
+            print(new_account.__repr__)
         else:
             print(prompts.UNKNOWN_ERROR)
 
@@ -78,6 +81,21 @@ def login_user():
 
 def display_main_menu():
     """Main function to handle menu options."""
+    while True:
+        opt = get_user_option(main_menu_options)
+        if opt == 0:
+            print(prompts.EXIT)
+            break
+        if opt == 1:
+            login_user()
+        elif opt == 2:
+            register_user()
+        else:
+            print(prompts.INVALID_INPUT_TEXT)
+
+
+def display_login_menu():
+    """sub function to handle login menu options."""
     while True:
         opt = get_user_option()
         if opt == 0:
