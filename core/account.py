@@ -56,6 +56,9 @@ class Account:
                 }
             }
         )
+        f = open("data/user_accounts.txt", "a", encoding="UTF-8")
+        f.write(f"{self.email} {self.first_name} {self.last_name} {self.gender} {self.email} {self.phone_no} {self.password} {self.initial_deposit} {self.account_type} {self.date_created.strftime("%Y-%m-%d %H:%M:%S")} {self.date_of_birth} {self.country} {self.city}" + "\n")
+        f.close()
         return True
 
     @staticmethod

@@ -1,5 +1,6 @@
 from data import prompts
 from data.menu_options import main_menu_options
+from data.menu_options import login_menu_options
 from core.account import Account
 from utils.input_handler import UserInputHandler
 
@@ -63,8 +64,7 @@ def register_user():
         )
         if new_account.register_user():
             print(prompts.REGISTER_SUCCESS)
-            print("\n------------------------------------\n")
-            print(new_account.__repr__)
+            display_login_menu()
         else:
             print(prompts.UNKNOWN_ERROR)
 
@@ -75,6 +75,7 @@ def login_user():
     password = input("Enter your password: ")
     if Account.login_user(email, password):
         print(prompts.LOGIN_SUCCESS)
+        display_login_menu()
     else:
         print(prompts.LOGIN_FAILED)
 
@@ -97,14 +98,14 @@ def display_main_menu():
 def display_login_menu():
     """sub function to handle login menu options."""
     while True:
-        opt = get_user_option()
+        opt = get_user_option(login_menu_options)
         if opt == 0:
             print(prompts.EXIT)
             break
         if opt == 1:
-            login_user()
+            pass
         elif opt == 2:
-            register_user()
+            pass
         else:
             print(prompts.INVALID_INPUT_TEXT)
 

@@ -2,7 +2,7 @@
 
 DASHES = " --------------- "
 WELCOME_TEXT = f"\n{DASHES}Welcome to CUAP Banking LTD{DASHES}\n"
-MENU_TEXT = "\nPlease choose an option from the Menu. Enter '0' to exit the app.\n"
+MENU_TEXT = "\nPlease choose an option from the Menu. Enter '0' to exit.\n"
 INVALID_INPUT_TEXT = (
     f"\n{DASHES}ERROR: Invalid Option Selected. Please enter a valid option.{DASHES}\n"
 )
