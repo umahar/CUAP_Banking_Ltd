@@ -110,4 +110,9 @@ def display_login_menu():
             print(prompts.INVALID_INPUT_TEXT)
 
 
-display_main_menu()
+def main():
+    Account.load_data()
+    display_main_menu()
+
+
+main()
