@@ -1,3 +1,5 @@
+"""This is the main.py The program starts from this file"""
+
 from data import prompts
 from data.menu_options import main_menu_options
 from data.menu_options import login_menu_options
@@ -5,13 +7,15 @@ from core.account import Account
 from utils.input_handler import UserInputHandler
 
 
-def get_user_option(options):
+def get_user_option(heading, options):
     """Display the main menu and get the user's option."""
     while True:
+        print(heading)
         print(prompts.MENU_TEXT)
         for index, item in enumerate(options):
             print(f"{index + 1}. {item}")
         opt = input("\nOption #: ")
+        print("")
         if opt.strip().isdigit():
             opt = int(opt)
             if 0 <= opt <= len(options):
@@ -36,7 +40,7 @@ def register_user():
         gender = UserInputHandler.get_valid_gender(
             "Enter your gender (Male/Female/Other): "
         )
-        initial_deposit = UserInputHandler.get_valid_deposit(
+        account_balance = UserInputHandler.get_valid_deposit(
             "Enter your initial deposit: "
         )
         account_type = UserInputHandler.get_valid_acc_type(
@@ -55,7 +59,7 @@ def register_user():
             last_name,
             gender,
             password,
-            initial_deposit,
+            account_balance,
             account_type,
             date_of_birth,
             country,
@@ -72,9 +76,9 @@ def login_user(email, password):
     """Handle user login."""
 
     if Account.login_user(email, password):
-        user_details = Account.get_user_details(email)
+        user_details = Account.user_accounts.get(email)
         print(prompts.LOGIN_SUCCESS)
-        display_login_menu(user_details)
+        display_login_menu(email, user_details)
     else:
         print(prompts.LOGIN_FAILED)
 
@@ -82,12 +86,12 @@ def login_user(email, password):
 def display_main_menu():
     """Main function to handle menu options."""
     while True:
-        opt = get_user_option(main_menu_options)
+        opt = get_user_option(prompts.WELCOME_TEXT, main_menu_options)
         if opt == 0:
             print(prompts.EXIT)
             break
         if opt == 1:
-            email = UserInputHandler.get_valid_email("Enter your email to register: ")
+            email = UserInputHandler.get_valid_email("Enter your email to login: ")
             password = input("Enter your password: ")
             login_user(email, password)
         elif opt == 2:
@@ -96,22 +100,25 @@ def display_main_menu():
             print(prompts.INVALID_INPUT_TEXT)
 
 
-def display_login_menu(user_details):
+def display_login_menu(email, user_details):
     """sub function to handle login menu options."""
     while True:
-        print(
+        opt = get_user_option(
             prompts.WELCOME_LOGIN_TEXT.format(
+                prompts.DASHES,
                 user_details["first_name"],
                 user_details["last_name"],
-                user_details["initial_deposit"],
-            )
+                user_details["account_balance"],
+                prompts.DASHES,
+            ),
+            login_menu_options,
         )
-        opt = get_user_option(login_menu_options)
-        if opt == 0:
-            print(prompts.EXIT)
+        if opt in (0, 9):
+            print(prompts.LOGOUT)
             break
         if opt == 1:
-            pass
+            print(prompts.MY_DETAILS)
+            Account.display_user_details(email)
         elif opt == 2:
             pass
         else:
@@ -119,8 +126,8 @@ def display_login_menu(user_details):
 
 
 def main():
+    """Main function to start the program"""
     Account.load_data()
-    print(prompts.WELCOME_TEXT)
     display_main_menu()
 
 

@@ -1,3 +1,5 @@
+"""This file contains diff kinds of options for menus"""
+
 main_menu_options = [
     "Login Account",
     "Register a new Account",
