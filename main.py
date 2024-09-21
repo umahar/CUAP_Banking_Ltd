@@ -7,7 +7,6 @@ from utils.input_handler import UserInputHandler
 
 def get_user_option(options):
     """Display the main menu and get the user's option."""
-    print(prompts.WELCOME_TEXT)
     while True:
         print(prompts.MENU_TEXT)
         for index, item in enumerate(options):
@@ -64,18 +63,18 @@ def register_user():
         )
         if new_account.register_user():
             print(prompts.REGISTER_SUCCESS)
-            display_login_menu()
+            login_user(email, password)
         else:
             print(prompts.UNKNOWN_ERROR)
 
 
-def login_user():
+def login_user(email, password):
     """Handle user login."""
-    email = UserInputHandler.get_valid_email("Enter your email to register: ")
-    password = input("Enter your password: ")
+
     if Account.login_user(email, password):
+        user_details = Account.get_user_details(email)
         print(prompts.LOGIN_SUCCESS)
-        display_login_menu()
+        display_login_menu(user_details)
     else:
         print(prompts.LOGIN_FAILED)
 
@@ -88,16 +87,25 @@ def display_main_menu():
             print(prompts.EXIT)
             break
         if opt == 1:
-            login_user()
+            email = UserInputHandler.get_valid_email("Enter your email to register: ")
+            password = input("Enter your password: ")
+            login_user(email, password)
         elif opt == 2:
             register_user()
         else:
             print(prompts.INVALID_INPUT_TEXT)
 
 
-def display_login_menu():
+def display_login_menu(user_details):
     """sub function to handle login menu options."""
     while True:
+        print(
+            prompts.WELCOME_LOGIN_TEXT.format(
+                user_details["first_name"],
+                user_details["last_name"],
+                user_details["initial_deposit"],
+            )
+        )
         opt = get_user_option(login_menu_options)
         if opt == 0:
             print(prompts.EXIT)
@@ -112,6 +120,7 @@ def display_login_menu():
 
 def main():
     Account.load_data()
+    print(prompts.WELCOME_TEXT)
     display_main_menu()
 
 

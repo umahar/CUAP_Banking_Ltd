@@ -83,7 +83,7 @@ class Account:
             lines = fp.readlines()
             # Iterate the file till it reached the EOF
             for line in lines:
-                print(line, end='')
+                print(lines.index(line)+1,":",line, end='')
                 dp = line.split()
                 Account.user_accounts.update(
             {
@@ -104,8 +104,6 @@ class Account:
             }
         )
         
-        
-        
     def __str__(self):
         return f"Account for {self.first_name} {self.last_name} ({self.email})"
 
@@ -118,3 +116,8 @@ class Account:
             f"date_of_birth={self.date_of_birth}, country={self.country}, "
             f"city={self.city})"
         )
+
+    @staticmethod
+    def get_user_details(email):
+        details = Account.user_accounts.get(email)
+        return details
