@@ -1,5 +1,6 @@
 """this file will call the relevant input validation function and return prompts"""
 
+from core.account import Account
 from utils.input_check import CheckInput
 from data import prompts
 
@@ -12,7 +13,7 @@ class UserInputHandler:
         """this function will prompt the user to keep entering email
         and validating it until its correct"""
         email = input(prompt)
-        while not CheckInput.is_valid_email(email):
+        while not CheckInput.is_valid_email(email) and Account.is_old_user(email):
             print(prompts.INV_EMAIL)
             email = input(prompt)
         return email
