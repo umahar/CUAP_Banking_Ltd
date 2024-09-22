@@ -102,42 +102,45 @@ def handle_edit(email, item_to_edit, prompt):
         get_function_name = f"get_valid_{item_to_edit}"
         get_function = getattr(UserInputHandler, get_function_name)
         new_data = get_function(prompt)
+        if item_to_edit=='email':
+            while Account.is_old_user(new_data):
+                print(prompts.REGISTER_FAILED)
+                new_data = get_function(prompt)
         Account.update_new_value(email, item_to_edit, new_data)
         print(
-            f"{prompts.DASHES}Changing {item_to_edit.title().replace("_"," ")}: '{current_data}' to '{Account.user_accounts[email][item_to_edit]}'{prompts.DASHES}"
+            f"{prompts.DASHES}Changing {item_to_edit.title().replace("_"," ")}:"
+            f" '{current_data}' to '{new_data}'{prompts.DASHES}"
         )
         print(prompts.UPDATE_SUCCESSFUL)
 
 
 def edit_user_details(email):
     """function to edit the current user details"""
-    while True:
-        raw_menu_items = Account.user_accounts.get(email)
-        menu_items = []
-        for item in raw_menu_items:
-            menu_items.append(item.replace("_", " ").title())
-
-        opt = get_user_option(prompts.EDIT_DETAILS, menu_items)
-        func_map = {
-            1: lambda: handle_edit(email, "first_name", "Enter your new First Name: "),
-            2: lambda: handle_edit(email, "last_name", "Enter your new Last Name: "),
-            3: lambda: handle_edit(email, "gender", "Enter your new Gender: "),
-            4: lambda: handle_edit(email, "email", "Enter your new Email: "),
-            5: lambda: handle_edit(email, "phone_no", "Enter your new Phone No: "),
-            6: lambda: handle_edit(email, "password", "Enter your new Password: "),
-            7: lambda: handle_edit(email, "account_balance", "Enter your new Acount Balance: "),
-            8: lambda: handle_edit(email, "account_type", "Enter your new Account Type: "),
-            9: lambda: handle_edit(email, "date_created", "Enter your new Date of Acc Creation: "),
-            10: lambda: handle_edit(email, "date_of_birth", "Enter your new Date of Birth: "),
-            11: lambda: handle_edit(email, "country", "Enter your new Country: "),
-            12: lambda: handle_edit(email, "city", "Enter your new City: "),
-        }
-        if opt == 0:
-            break
-        if opt in func_map:
-            func_map[opt]()
-        else:
-            print(prompts.INVALID_INPUT_TEXT)
+    raw_menu_items = Account.user_accounts.get(email)
+    menu_items = []
+    for item in raw_menu_items:
+        menu_items.append(item.replace("_", " ").title())
+    opt = get_user_option(prompts.EDIT_DETAILS, menu_items)
+    func_map = {
+        1: lambda: handle_edit(email, "first_name", "Enter your new First Name: "),
+        2: lambda: handle_edit(email, "last_name", "Enter your new Last Name: "),
+        3: lambda: handle_edit(email, "gender", "Enter your new Gender: "),
+        4: lambda: handle_edit(email, "email", "Enter your new Email: "),
+        5: lambda: handle_edit(email, "phone_no", "Enter your new Phone No: "),
+        6: lambda: handle_edit(email, "password", "Enter your new Password: "),
+        7: lambda: handle_edit(email, "account_balance", "Enter your new Acount Balance: "),
+        8: lambda: handle_edit(email, "account_type", "Enter your new Account Type: "),
+        9: lambda: handle_edit(email, "date_created", "Enter your new Date of Acc Creation: "),
+        10: lambda: handle_edit(email, "date_of_birth", "Enter your new Date of Birth: "),
+        11: lambda: handle_edit(email, "country", "Enter your new Country: "),
+        12: lambda: handle_edit(email, "city", "Enter your new City: "),
+    }
+    if opt == 0:
+        pass
+    if opt in func_map:
+        func_map[opt]()
+    else:
+        print(prompts.INVALID_INPUT_TEXT)
 
 
 def display_login_menu(email, user_details):

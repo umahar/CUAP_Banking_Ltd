@@ -107,19 +107,6 @@ class Account:
                 }
             }
         )    
-    
-    def __str__(self):
-        return f"Account for {self.first_name} {self.last_name} ({self.email})"
-
-    def __repr__(self):
-        return (
-            f"Account(email={self.email}, phone_no={self.phone_no}, "
-            f"name={self.first_name} {self.last_name}, "
-            f"gender={self.gender}, initial_deposit={self.account_balance}, "
-            f"account_type={self.account_type}, "
-            f"date_of_birth={self.date_of_birth}, country={self.country}, "
-            f"city={self.city})"
-        )
 
     @staticmethod
     def display_user_details(email):
@@ -145,12 +132,16 @@ class Account:
 
     @staticmethod
     def update_new_value(email,item_to_edit,updated_value):
-        """this function takes the updated value and stores it in dict and and calls for file update"""
+        """this function takes the updated value and stores
+        it in dict and and calls for file update"""      
         Account.user_accounts[email][item_to_edit]=updated_value
         user_details = Account.user_accounts.get(email)
         list_of_acc = list(Account.user_accounts.keys())
         line_no = list_of_acc.index(email)
-        data = email+" "
+        if item_to_edit == 'email':
+            data = updated_value + " "
+        else:
+            data = email + " "
         for _key,value in user_details.items():
             data = data + str(value) + " "
         Account.replace_line_in_file("data/user_accounts.txt",line_no,data)
