@@ -6,9 +6,6 @@ import re
 class CheckInput:
     """this class will actually check and validate the inputs provided for each fields"""
 
-    def __init__(self) -> None:
-        pass
-
     @staticmethod
     def is_valid_email(email):
         """function to check if email is valid"""

@@ -1,7 +1,6 @@
 """This is the account class that will manage all user accounts"""
 
 from datetime import datetime
-from os import replace
 
 
 class Account:
@@ -145,9 +144,9 @@ class Account:
 
 
     @staticmethod
-    def update_first_name(email,updated_value):
+    def update_new_value(email,item_to_edit,updated_value):
         """this function takes the updated value and stores it in dict and and calls for file update"""
-        Account.user_accounts[email]["first_name"]=updated_value
+        Account.user_accounts[email][item_to_edit]=updated_value
         user_details = Account.user_accounts.get(email)
         list_of_acc = list(Account.user_accounts.keys())
         line_no = list_of_acc.index(email)

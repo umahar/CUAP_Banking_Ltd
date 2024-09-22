@@ -13,7 +13,7 @@ class UserInputHandler:
         """this function will prompt the user to keep entering email
         and validating it until its correct"""
         email = input(prompt)
-        while not CheckInput.is_valid_email(email) and Account.is_old_user(email):
+        while not CheckInput.is_valid_email(email) and not Account.is_old_user(email):
             print(prompts.INV_EMAIL)
             email = input(prompt)
         return email
@@ -39,19 +39,31 @@ class UserInputHandler:
         return phone_no
 
     @staticmethod
-    def get_valid_name(prompt, name_type="Name"):
+    def get_valid_first_name(prompt):
         """this function will prompt the user to keep entering name
         and validating it until its correct"""
         name = input(prompt)
         while not CheckInput.is_valid_name(name):
             print(
-                f"{prompts.DASHES}ERROR: Invalid {name_type}. Please enter again{prompts.DASHES}"
+                f"{prompts.DASHES}ERROR: Invalid Name. Please enter again{prompts.DASHES}"
             )
             name = input(prompt)
         return name
 
     @staticmethod
-    def get_valid_date(prompt):
+    def get_valid_last_name(prompt):
+        """this function will prompt the user to keep entering name
+        and validating it until its correct"""
+        name = input(prompt)
+        while not CheckInput.is_valid_name(name):
+            print(
+                f"{prompts.DASHES}ERROR: Invalid Name. Please enter again{prompts.DASHES}"
+            )
+            name = input(prompt)
+        return name
+
+    @staticmethod
+    def get_valid_date_of_birth(prompt):
         """this function will prompt the user to keep entering date of birth
         and validating it until its correct"""
         dob = input(prompt)
@@ -61,7 +73,7 @@ class UserInputHandler:
         return dob
 
     @staticmethod
-    def get_valid_deposit(prompt):
+    def get_valid_account_balance(prompt):
         """this function will prompt the user to keep entering deposit
         and validating it until its correct"""
         deposit = input(prompt)
@@ -81,7 +93,7 @@ class UserInputHandler:
         return gender
 
     @staticmethod
-    def get_valid_acc_type(prompt):
+    def get_valid_account_type(prompt):
         """this function will prompt the user to keep entering account type
         and validating it until its correct"""
         acc_type = input(prompt)
@@ -89,3 +101,31 @@ class UserInputHandler:
             print(prompts.INV_ACC_TYPE)
             acc_type = input(prompt)
         return acc_type
+
+    @staticmethod
+    def get_valid_date_created(prompt):
+        pass
+
+    @staticmethod
+    def get_valid_country(prompt):
+        """this function will prompt the user to keep entering name
+        and validating it until its correct"""
+        name = input(prompt)
+        while not CheckInput.is_valid_name(name):
+            print(
+                f"{prompts.DASHES}ERROR: Invalid Country Name. Please enter again{prompts.DASHES}"
+            )
+            name = input(prompt)
+        return name
+
+    @staticmethod
+    def get_valid_city(prompt):
+        """this function will prompt the user to keep entering name
+        and validating it until its correct"""
+        name = input(prompt)
+        while not CheckInput.is_valid_name(name):
+            print(
+                f"{prompts.DASHES}ERROR: Invalid City Name. Please enter again{prompts.DASHES}"
+            )
+            name = input(prompt)
+        return name

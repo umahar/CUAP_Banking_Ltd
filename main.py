@@ -25,48 +25,48 @@ def get_user_option(heading, options):
 
 def register_user():
     """Handle user registration."""
-    email = UserInputHandler.get_valid_email("Enter your email to register: ")
-    password = UserInputHandler.get_valid_password("Enter your password: ")
-    phone_no = UserInputHandler.get_valid_phone_no("Enter your phone no: ")
-    first_name = UserInputHandler.get_valid_name(
-        "Enter your first name: ", "First Name"
-    )
-    last_name = UserInputHandler.get_valid_name("Enter your last name: ", "Last Name")
-    gender = UserInputHandler.get_valid_gender(
-        "Enter your gender (Male/Female/Other): "
-    )
-    account_balance = UserInputHandler.get_valid_deposit("Enter your initial deposit: ")
-    account_type = UserInputHandler.get_valid_acc_type(
-        """Enter your account type("Current", "Saving", "Other"): """
-    )
-    date_of_birth = UserInputHandler.get_valid_date(
-        "Enter your date of birth (YYYY-MM-DD): "
-    )
-    country = input("Enter your country: ")
-    city = input("Enter your city: ")
-    new_account = Account(
-        email,
-        phone_no,
-        first_name,
-        last_name,
-        gender,
-        password,
-        account_balance,
-        account_type,
-        date_of_birth,
-        country,
-        city,
-    )
-    if new_account.register_user():
-        print(prompts.REGISTER_SUCCESS)
-        login_user(email, password)
+    email = UserInputHandler.get_valid_email("Enter your Email to register: ")
+    if Account.is_old_user(email):
+        print(prompts.REGISTER_FAILED)
     else:
-        print(prompts.UNKNOWN_ERROR)
+        password = UserInputHandler.get_valid_password("Enter your Password: ")
+        phone_no = UserInputHandler.get_valid_phone_no("Enter your Phone No: ")
+        first_name = UserInputHandler.get_valid_first_name("Enter your First Name: ")
+        last_name = UserInputHandler.get_valid_last_name("Enter your Last Name: ")
+        gender = UserInputHandler.get_valid_gender(
+            "Enter your gender (Male/Female/Other): "
+        )
+        account_balance = UserInputHandler.get_valid_account_balance("Enter your initial Deposit: ")
+        account_type = UserInputHandler.get_valid_account_type(
+            """Enter your Account type("Current", "Saving", "Other"): """
+        )
+        date_of_birth = UserInputHandler.get_valid_date_of_birth(
+            "Enter your Date of Birth (YYYY-MM-DD): "
+        )
+        country = UserInputHandler.get_valid_country("Enter name of your Country: ")
+        city = UserInputHandler.get_valid_city("Enter name of your City: ")
+        new_account = Account(
+            email,
+            phone_no,
+            first_name,
+            last_name,
+            gender,
+            password,
+            account_balance,
+            account_type,
+            date_of_birth,
+            country,
+            city,
+        )
+        if new_account.register_user():
+            print(prompts.REGISTER_SUCCESS)
+            login_user(email, password)
+        else:
+            print(prompts.UNKNOWN_ERROR)
 
 
 def login_user(email, password):
     """Handle user login."""
-
     if Account.login_user(email, password):
         user_details = Account.user_accounts.get(email)
         print(prompts.LOGIN_SUCCESS)
@@ -83,8 +83,8 @@ def display_main_menu():
             print(prompts.EXIT)
             break
         if opt == 1:
-            email = UserInputHandler.get_valid_email("Enter your email to login: ")
-            password = input("Enter your password: ")
+            email = UserInputHandler.get_valid_email("Enter your account Email to login: ")
+            password = input("Enter your account Password: ")
             login_user(email, password)
         elif opt == 2:
             register_user()
@@ -92,14 +92,21 @@ def display_main_menu():
             print(prompts.INVALID_INPUT_TEXT)
 
 
-def handle_first_name(email):
-    current_data = Account.user_accounts[email]["first_name"]
-    first_name = UserInputHandler.get_valid_name(
-        "Enter your new first name: ", "First Name"
-    )
-    Account.update_first_name(email, first_name)
-    print(f"Changing {current_data} to {Account.user_accounts[email]["first_name"]}")
-    print(prompts.UPDATE_SUCCESSFUL)
+def handle_edit(email, item_to_edit, prompt):
+    """the function to take the new data and call the update functions"""
+    if item_to_edit in ('account_balance','date_created'):
+        print(prompts.EDIT_NOT_ALLOWED)
+    else:
+        current_data = Account.user_accounts[email][item_to_edit]
+        print(f"Current {item_to_edit.title().replace("_"," ")}: ",current_data)
+        get_function_name = f"get_valid_{item_to_edit}"
+        get_function = getattr(UserInputHandler, get_function_name)
+        new_data = get_function(prompt)
+        Account.update_new_value(email, item_to_edit, new_data)
+        print(
+            f"{prompts.DASHES}Changing {item_to_edit.title().replace("_"," ")}: '{current_data}' to '{Account.user_accounts[email][item_to_edit]}'{prompts.DASHES}"
+        )
+        print(prompts.UPDATE_SUCCESSFUL)
 
 
 def edit_user_details(email):
@@ -108,36 +115,29 @@ def edit_user_details(email):
         raw_menu_items = Account.user_accounts.get(email)
         menu_items = []
         for item in raw_menu_items:
-            if item in ("account_balance", "date_created"):
-                continue
             menu_items.append(item.replace("_", " ").title())
 
         opt = get_user_option(prompts.EDIT_DETAILS, menu_items)
         func_map = {
-            1: lambda: handle_first_name(email),
-            2: lambda: UserInputHandler.get_valid_name(
-                "Enter your new last name: ", "Last Name"
-            ),
-            3: lambda: UserInputHandler.get_valid_gender(
-                "Enter your new gender (Male/Female/Other): "
-            ),
-            4: lambda: UserInputHandler.get_valid_email("Enter your new email: "),
-            5: lambda: UserInputHandler.get_valid_phone_no("Enter your new phone no: "),
-            6: lambda: UserInputHandler.get_valid_password("Enter your new password: "),
-            7: lambda: UserInputHandler.get_valid_acc_type(
-                """Enter your new account type("Current", "Saving", "Other"): """
-            ),
-            8: lambda: UserInputHandler.get_valid_date(
-                "Enter your new date of birth (YYYY-MM-DD): "
-            ),
-            9: lambda: input("Enter your new country: "),
-            10: lambda: input("Enter your new city: "),
+            1: lambda: handle_edit(email, "first_name", "Enter your new First Name: "),
+            2: lambda: handle_edit(email, "last_name", "Enter your new Last Name: "),
+            3: lambda: handle_edit(email, "gender", "Enter your new Gender: "),
+            4: lambda: handle_edit(email, "email", "Enter your new Email: "),
+            5: lambda: handle_edit(email, "phone_no", "Enter your new Phone No: "),
+            6: lambda: handle_edit(email, "password", "Enter your new Password: "),
+            7: lambda: handle_edit(email, "account_balance", "Enter your new Acount Balance: "),
+            8: lambda: handle_edit(email, "account_type", "Enter your new Account Type: "),
+            9: lambda: handle_edit(email, "date_created", "Enter your new Date of Acc Creation: "),
+            10: lambda: handle_edit(email, "date_of_birth", "Enter your new Date of Birth: "),
+            11: lambda: handle_edit(email, "country", "Enter your new Country: "),
+            12: lambda: handle_edit(email, "city", "Enter your new City: "),
         }
         if opt == 0:
             break
         if opt in func_map:
-            # print(f"Current Detail for {menu_items[opt]}: {raw_menu_items[opt]}")
             func_map[opt]()
+        else:
+            print(prompts.INVALID_INPUT_TEXT)
 
 
 def display_login_menu(email, user_details):
