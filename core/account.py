@@ -1,7 +1,8 @@
 """This is the account class that will manage all user accounts"""
 
 from datetime import datetime
-
+from data import prompts
+from utils.input_handler import UserInputHandler
 
 class Account:
     """This is the account class that will manage all user accounts"""
@@ -63,6 +64,60 @@ class Account:
         return True
 
     @staticmethod
+    def handle_register_user():
+        """Handle user registration."""
+        email = UserInputHandler.get_valid_email("Enter your Email to register: ")
+        if Account.is_old_user(email):
+            print(prompts.REGISTER_FAILED)
+        else:
+            password = UserInputHandler.get_valid_password("Enter your Password: ")
+            phone_no = UserInputHandler.get_valid_phone_no("Enter your Phone No: ")
+            first_name = UserInputHandler.get_valid_first_name("Enter your First Name: ")
+            last_name = UserInputHandler.get_valid_last_name("Enter your Last Name: ")
+            gender = UserInputHandler.get_valid_gender(
+                "Enter your gender (Male/Female/Other): "
+            )
+            account_balance = UserInputHandler.get_valid_account_balance(
+                "Enter your initial Deposit: "
+            )
+            account_type = UserInputHandler.get_valid_account_type(
+                """Enter your Account type("Current", "Saving", "Other"): """
+            )
+            date_of_birth = UserInputHandler.get_valid_date_of_birth(
+                "Enter your Date of Birth (YYYY-MM-DD): "
+            )
+            country = UserInputHandler.get_valid_country("Enter name of your Country: ")
+            city = UserInputHandler.get_valid_city("Enter name of your City: ")
+            new_account = Account(
+                email,
+                phone_no,
+                first_name,
+                last_name,
+                gender,
+                password,
+                account_balance,
+                account_type,
+                date_of_birth,
+                country,
+                city,
+            )
+            if new_account.register_user():
+                print(prompts.REGISTER_SUCCESS)
+                Account.handle_login_user(email, password)
+            else:
+                print(prompts.UNKNOWN_ERROR)
+    
+    @staticmethod
+    def handle_login_user(email, password):
+        """Handle user login."""
+        if Account.login_user(email, password):
+            user_details = Account.user_accounts.get(email)
+            print(prompts.LOGIN_SUCCESS)
+            return user_details
+        print(prompts.LOGIN_FAILED)
+        return False
+     
+    @staticmethod
     def is_old_user(email):
         """This functions checks if the user already has an account"""
         if email in Account.user_accounts:
@@ -109,15 +164,6 @@ class Account:
         )    
 
     @staticmethod
-    def display_user_details(email):
-        """get the user details based on an email and prints them one by one"""
-        user_details = Account.user_accounts.get(email)
-        count = 1
-        for key,value in user_details.items():
-            print(f"{count}. {key.replace("_"," ").title()}:  {value}")
-            count+=1
-
-    @staticmethod
     def replace_line_in_file(file_path, line_number, new_data):
         """this function makes the change in the file"""
         with open(file_path, 'r',encoding="UTF-8") as file:
@@ -128,7 +174,6 @@ class Account:
 
         with open(file_path, 'w',encoding="UTF-8") as file:
             file.writelines(lines)
-
 
     @staticmethod
     def update_new_value(email,item_to_edit,updated_value):
@@ -145,3 +190,25 @@ class Account:
         for _key,value in user_details.items():
             data = data + str(value) + " "
         Account.replace_line_in_file("data/user_accounts.txt",line_no,data)
+
+    @staticmethod
+    def handle_edit(email, item_to_edit, prompt):
+        """the function to take the new data and call the update functions"""
+        if item_to_edit in ('account_balance','date_created'):
+            print(prompts.EDIT_NOT_ALLOWED)
+        else:
+            current_data = Account.user_accounts[email][item_to_edit]
+            print(f"Current {item_to_edit.title().replace("_"," ")}: ",current_data)
+            get_function_name = f"get_valid_{item_to_edit}"
+            get_function = getattr(UserInputHandler, get_function_name)
+            new_data = get_function(prompt)
+            if item_to_edit=='email':
+                while Account.is_old_user(new_data):
+                    print(prompts.REGISTER_FAILED)
+                    new_data = get_function(prompt)
+            Account.update_new_value(email, item_to_edit, new_data)
+            print(
+                f"{prompts.DASHES}Changing {item_to_edit.title().replace("_"," ")}:"
+                f" '{current_data}' to '{new_data}'{prompts.DASHES}"
+            )
+            print(prompts.UPDATE_SUCCESSFUL)
