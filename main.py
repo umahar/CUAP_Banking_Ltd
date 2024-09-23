@@ -20,24 +20,32 @@ def display_main_menu():
                 "Enter your account Email to login: "
             )
             password = input("Enter your account Password: ")
-            user_details = Account.handle_login_user(email, password)
-            if user_details:
-                display_login_menu(email, user_details)
+            user = Account.login_user(email, password)
+            if user:
+                print(prompts.LOGIN_SUCCESS)
+                display_login_menu(user)
+            else:
+                print(prompts.LOGIN_FAILED)
         elif opt == 2:
-            Account.handle_register_user()
+            user = Account.register_user()
+            if user:
+                print(prompts.REGISTER_SUCCESS)
+                display_login_menu(user)
+            else:
+                print(prompts.REGISTER_FAILED)
         else:
             print(prompts.INVALID_INPUT_TEXT)
 
 
-def display_login_menu(email, user_details):
+def display_login_menu(user):
     """sub function to handle login menu options."""
     while True:
         opt = AccountFunctions.get_user_option(
             prompts.WELCOME_LOGIN_TEXT.format(
                 prompts.DASHES,
-                user_details["first_name"],
-                user_details["last_name"],
-                user_details["account_balance"],
+                user.first_name,
+                user.last_name,
+                user.account_balance,
                 prompts.DASHES,
             ),
             login_menu_options,
@@ -47,9 +55,9 @@ def display_login_menu(email, user_details):
             break
         if opt == 1:
             print(prompts.MY_DETAILS)
-            AccountFunctions.display_user_details(email)
+            AccountFunctions.display_user_details(user)
         elif opt == 2:
-            AccountFunctions.edit_user_details(email)
+            AccountFunctions.edit_user_details(user)
         else:
             print(prompts.INVALID_INPUT_TEXT)
 
