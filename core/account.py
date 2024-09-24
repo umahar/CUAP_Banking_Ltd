@@ -17,7 +17,7 @@ class Account:
         last_name,
         gender,
         password,
-        account_balance,
+        initial_deposit,
         account_type,
         date_of_birth,
         country,
@@ -29,7 +29,7 @@ class Account:
         self.last_name = last_name
         self.gender = gender
         self.password = password
-        self.account_balance = account_balance
+        self.initial_deposit = initial_deposit
         self.account_type = account_type
         self.date_created = datetime.now()
         self.date_of_birth = date_of_birth
@@ -55,7 +55,7 @@ class Account:
         gender = UserInputHandler.get_valid_gender(
             "Enter your gender (Male/Female/Other): "
         )
-        account_balance = UserInputHandler.get_valid_account_balance(
+        initial_deposit = UserInputHandler.get_valid_initial_deposit(
             "Enter your initial Deposit: "
         )
         account_type = UserInputHandler.get_valid_account_type(
@@ -73,7 +73,7 @@ class Account:
             last_name,
             gender,
             password,
-            account_balance,
+            initial_deposit,
             account_type,
             date_of_birth,
             country,
@@ -83,7 +83,7 @@ class Account:
             file.write(
                     f"{new_account.email} {new_account.first_name} {new_account.last_name}"
                     f" {new_account.gender} {new_account.email} {new_account.phone_no}"
-                    f" {new_account.password} {new_account.account_balance}"
+                    f" {new_account.password} {new_account.initial_deposit}"
                     f" {new_account.account_type}"
                     f" {new_account.date_created.strftime("%Y-%m-%d")} {new_account.date_of_birth}"
                     f" {new_account.country} {new_account.city} + '\n'"
@@ -121,7 +121,7 @@ class Account:
                 email = dp[4]
                 phone_no = dp[5]
                 password = dp[6]
-                account_balance = dp[7]
+                initial_deposit = dp[7]
                 account_type = dp[8]
                 date_created = dp[9]
                 date_of_birth = dp[10]
@@ -134,7 +134,7 @@ class Account:
                     last_name,
                     gender,
                     password,
-                    account_balance,
+                    initial_deposit,
                     account_type,
                     date_of_birth,
                     country,
@@ -151,7 +151,7 @@ class Account:
                 file.write(
                     f"{new_account.email} {new_account.first_name} {new_account.last_name}"
                     f" {new_account.gender} {new_account.email} {new_account.phone_no}"
-                    f" {new_account.password} {new_account.account_balance}"
+                    f" {new_account.password} {new_account.initial_deposit}"
                     f" {new_account.account_type}"
                     f" {new_account.date_created.strftime("%Y-%m-%d")} {new_account.date_of_birth}"
                     f" {new_account.country} {new_account.city} + '\n'"
@@ -160,7 +160,7 @@ class Account:
     @staticmethod
     def handle_edit(user, item_to_edit, prompt):
         """the function to take the new data and call the update functions"""
-        if item_to_edit in ("account_balance","date_created"):
+        if item_to_edit in ("initial_deposit","date_created"):
             print(prompts.EDIT_NOT_ALLOWED)
         else:
             old_data = getattr(user,item_to_edit)

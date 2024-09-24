@@ -45,7 +45,7 @@ def display_login_menu(user):
                 prompts.DASHES,
                 user.first_name,
                 user.last_name,
-                user.account_balance,
+                user.initial_deposit,
                 prompts.DASHES,
             ),
             login_menu_options,

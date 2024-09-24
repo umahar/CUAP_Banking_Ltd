@@ -30,7 +30,7 @@ class AccountFunctions:
             f"1. Email: {user.email}\n2. First Name: {user.first_name}"
             f"\n3. Last Name: {user.last_name}\n4. Gender: {user.gender}"
             f"\n5. Phone No: {user.phone_no}\n6. Password: {user.password}"
-            f"\n7. Account Balance: {user.account_balance}\n8. Account Type: {user.account_type}"
+            f"\n7. Initial Deposit: {user.initial_deposit}\n8. Account Type: {user.account_type}"
             f"\n9. Date Created: {user.date_created}\n10. Date of Birth: {user.date_of_birth}"
             f"\n11. Country: {user.country}\n12. City: {user.city}"
         )
@@ -45,7 +45,7 @@ class AccountFunctions:
             f"Email: {user.email}",
             f"Phone No: {user.phone_no}",
             f"Password: {user.password}",
-            f"Account Balance: {user.account_balance}",
+            f"Initial Deposit: {user.initial_deposit}",
             f"Account Type: {user.account_type}",
             f"Date Created: {user.date_created}",
             f"Date of Birth: {user.date_of_birth}",
@@ -69,7 +69,7 @@ class AccountFunctions:
                 user, "password", "Enter your new Password: "
             ),
             7: lambda: Account.handle_edit(
-                user, "account_balance", "Enter your new Acount Balance: "
+                user, "initial_deposit", "Enter your new Acount Balance: "
             ),
             8: lambda: Account.handle_edit(
                 user, "account_type", "Enter your new Account Type: "

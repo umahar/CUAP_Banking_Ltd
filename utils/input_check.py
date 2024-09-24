@@ -40,10 +40,10 @@ class CheckInput:
         return re.match(name_regex, name) is not None
 
     @staticmethod
-    def is_valid_deposit(account_balance):
+    def is_valid_deposit(initial_deposit):
         """function to check if account balance is valid"""
         try:
-            amount = float(account_balance)
+            amount = float(initial_deposit)
             return amount > 0
         except ValueError:
             return False

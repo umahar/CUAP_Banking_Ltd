@@ -72,7 +72,7 @@ class UserInputHandler:
         return dob
 
     @staticmethod
-    def get_valid_account_balance(prompt):
+    def get_valid_initial_deposit(prompt):
         """this function will prompt the user to keep entering deposit
         and validating it until its correct"""
         deposit = input(prompt)
