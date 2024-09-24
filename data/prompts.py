@@ -34,7 +34,7 @@ INV_ACC_TYPE = (
     f"\n{DASHES}ERROR:Invalid Account Type. Must be 'Current',"
     f"'Saving', or 'Other'.Please enter again{DASHES}\n"
 )
-WELCOME_LOGIN_TEXT = "\n{}Welcome {} {}, your account balance is Rs. {}.{}\n"
+WELCOME_LOGIN_TEXT = "\n{}Welcome {} {}{}\n"
 MY_DETAILS = f"\n{DASHES}LOADING DETAILS{DASHES}\n"
 EDIT_DETAILS = f"\n{DASHES}EDIT DETAILS{DASHES}\n"
 UPDATE_SUCCESSFUL = f"\n{DASHES}DATA UPDATE SUCCESSFUL{DASHES}\n"
@@ -42,3 +42,7 @@ EDIT_NOT_ALLOWED = (
     f"\n{DASHES}ERROR:You can not edit this detail."
     f" Please contact bank support.{DASHES}\n"
 )
+CURRENT_BALANCE = "\nAccount Balance: {}"
+DEPOSIT_SUCCESSFUL = f"\n{DASHES}AMOUNT DEPOSITED{DASHES}\n"
+WITHDRAW_SUCCESSFUL = f"\n{DASHES}AMOUNT WITHDRAWN{DASHES}\n"
+INSUFFICIENT_BALANCE = f"\n{DASHES}ERROR:Insufficient Balance.{DASHES}\n"

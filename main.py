@@ -45,7 +45,6 @@ def display_login_menu(user):
                 prompts.DASHES,
                 user.first_name,
                 user.last_name,
-                user.initial_deposit,
                 prompts.DASHES,
             ),
             login_menu_options,
@@ -58,6 +57,26 @@ def display_login_menu(user):
             AccountFunctions.display_user_details(user)
         elif opt == 2:
             AccountFunctions.edit_user_details(user)
+        elif opt == 3:
+            print(prompts.CURRENT_BALANCE.format(user.balance.get_balance()))
+        elif opt == 4:
+            print(prompts.CURRENT_BALANCE.format(user.balance.get_balance()))
+            amount = UserInputHandler.get_valid_initial_deposit(
+                "Enter your Deposit Amount: "
+            )
+            user.balance.deposit(amount)
+            print(prompts.CURRENT_BALANCE.format(user.balance.get_balance()))
+            print(prompts.DEPOSIT_SUCCESSFUL)
+        elif opt == 5:
+            print(prompts.CURRENT_BALANCE.format(user.balance.get_balance()))
+            amount = UserInputHandler.get_valid_initial_deposit(
+                "Enter your WithDrawl Amount: "
+            )
+            if user.balance.withdraw(amount):
+                print(prompts.CURRENT_BALANCE.format(user.balance.get_balance()))
+                print(prompts.WITHDRAW_SUCCESSFUL)
+            else:
+                print(prompts.INSUFFICIENT_BALANCE)
         else:
             print(prompts.INVALID_INPUT_TEXT)
 

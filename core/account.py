@@ -1,6 +1,7 @@
 """This is the account class that will manage all user accounts"""
 
 from datetime import datetime
+from core.balance import Balance
 from data import prompts
 from utils.input_handler import UserInputHandler
 
@@ -35,6 +36,7 @@ class Account:
         self.date_of_birth = date_of_birth
         self.country = country
         self.city = city
+        self.balance = Balance(initial_deposit)
         Account.accounts_data[self.email]=self
 
     @staticmethod
@@ -86,7 +88,7 @@ class Account:
                     f" {new_account.password} {new_account.initial_deposit}"
                     f" {new_account.account_type}"
                     f" {new_account.date_created.strftime("%Y-%m-%d")} {new_account.date_of_birth}"
-                    f" {new_account.country} {new_account.city} + '\n'"
+                    f" {new_account.country} {new_account.city} {new_account.balance.get_balance()}\n"
                        )
         return new_account
 
@@ -127,6 +129,7 @@ class Account:
                 date_of_birth = dp[10]
                 country = dp[11]
                 city = dp[12]
+                balance = dp[13]
                 new_account = Account(
                     email,
                     phone_no,
@@ -140,10 +143,17 @@ class Account:
                     country,
                     city,)
                 new_account.date_created = date_created
+                new_account.balance.set_balance(balance)
     @staticmethod
     def update_new_value(user,item_to_edit,updated_value):
         """this function takes the updated value and stores
         it in dict and and calls for file update"""
+        #making a copy of data
+        # open both files 
+        with open('data/user_accounts_data.txt','r', encoding="UTF-8") as first_file, open('data/temp_data.txt','a', encoding="UTF-8") as second_file:
+            second_file.write("\n")
+            for line in first_file:
+                second_file.write(line)
         setattr(user,item_to_edit,updated_value)
         with open("data/user_accounts_data.txt", "w", encoding="UTF-8") as file:
             for email in Account.accounts_data:
@@ -153,8 +163,8 @@ class Account:
                     f" {new_account.gender} {new_account.email} {new_account.phone_no}"
                     f" {new_account.password} {new_account.initial_deposit}"
                     f" {new_account.account_type}"
-                    f" {new_account.date_created.strftime("%Y-%m-%d")} {new_account.date_of_birth}"
-                    f" {new_account.country} {new_account.city} + '\n'"
+                    f" {new_account.date_created} {new_account.date_of_birth}"
+                    f" {new_account.country} {new_account.city} {new_account.balance.get_balance()}\n"
                     )
 
     @staticmethod

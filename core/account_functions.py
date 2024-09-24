@@ -27,12 +27,12 @@ class AccountFunctions:
     def display_user_details(user):
         """get the user details based on an email and prints them one by one"""
         print(
-            f"1. Email: {user.email}\n2. First Name: {user.first_name}"
-            f"\n3. Last Name: {user.last_name}\n4. Gender: {user.gender}"
-            f"\n5. Phone No: {user.phone_no}\n6. Password: {user.password}"
-            f"\n7. Initial Deposit: {user.initial_deposit}\n8. Account Type: {user.account_type}"
-            f"\n9. Date Created: {user.date_created}\n10. Date of Birth: {user.date_of_birth}"
-            f"\n11. Country: {user.country}\n12. City: {user.city}"
+            f"Email: {user.email}\nFirst Name: {user.first_name}"
+            f"\nLast Name: {user.last_name}\nBalance: {user.balance.get_balance()}\nGender: {user.gender}"
+            f"\nPhone No: {user.phone_no}\nPassword: {user.password}"
+            f"\nInitial Deposit: {user.initial_deposit}\nAccount Type: {user.account_type}"
+            f"\nDate Created: {user.date_created}\nDate of Birth: {user.date_of_birth}"
+            f"\nCountry: {user.country}\nCity: {user.city}"
         )
 
     @staticmethod
