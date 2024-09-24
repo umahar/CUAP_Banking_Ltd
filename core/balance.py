@@ -1,5 +1,7 @@
 """this class will handle the user account balance"""
 
+from core import account
+
 
 class Balance:
     """this class will handle the user account balance"""
@@ -16,10 +18,12 @@ class Balance:
 
     def deposit(self, amount):
         self.amount += float(amount)
+        account.Account.update_new_value()
 
     def withdraw(self, amount):
         if self.amount >= float(amount):
             self.amount -= float(amount)
+            account.Account.update_new_value()
             return True
         return False
 

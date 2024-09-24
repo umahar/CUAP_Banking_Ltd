@@ -32,7 +32,7 @@ class Account:
         self.password = password
         self.initial_deposit = initial_deposit
         self.account_type = account_type
-        self.date_created = datetime.now()
+        self.date_created = datetime.now().date()
         self.date_of_birth = date_of_birth
         self.country = country
         self.city = city
@@ -87,7 +87,7 @@ class Account:
                     f" {new_account.gender} {new_account.email} {new_account.phone_no}"
                     f" {new_account.password} {new_account.initial_deposit}"
                     f" {new_account.account_type}"
-                    f" {new_account.date_created.strftime("%Y-%m-%d")} {new_account.date_of_birth}"
+                    f" {new_account.date_created} {new_account.date_of_birth}"
                     f" {new_account.country} {new_account.city} {new_account.balance.get_balance()}\n"
                        )
         return new_account
@@ -145,7 +145,7 @@ class Account:
                 new_account.date_created = date_created
                 new_account.balance.set_balance(balance)
     @staticmethod
-    def update_new_value(user,item_to_edit,updated_value):
+    def update_new_value(user='null',item_to_edit='balance',updated_value='null'):
         """this function takes the updated value and stores
         it in dict and and calls for file update"""
         #making a copy of data
@@ -154,7 +154,8 @@ class Account:
             second_file.write("\n")
             for line in first_file:
                 second_file.write(line)
-        setattr(user,item_to_edit,updated_value)
+        if item_to_edit != 'balance':
+            setattr(user,item_to_edit,updated_value)
         with open("data/user_accounts_data.txt", "w", encoding="UTF-8") as file:
             for email in Account.accounts_data:
                 new_account=Account.accounts_data.get(email)
