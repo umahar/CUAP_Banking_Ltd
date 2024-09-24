@@ -1,3 +1,5 @@
+"""this class manages auxillary functions to do tasks"""
+
 from core.account import Account
 from data import prompts
 
@@ -25,9 +27,12 @@ class AccountFunctions:
     def display_user_details(user):
         """get the user details based on an email and prints them one by one"""
         print(
-            f"1. Email: {user.email}\n2. First Name: {user.first_name}\n3. Last Name: {user.last_name}"
-            f"\n4. Gender: {user.gender}\n5. Phone No: {user.phone_no}\n6. Password: {user.password}\n7. Account Balance: {user.account_balance}"
-            f"\n8. Account Type: {user.account_type}\n9. Date Created: {user.date_created}\n10. Date of Birth: {user.date_of_birth}\n11. Country: {user.country}\n12. City: {user.city}"
+            f"1. Email: {user.email}\n2. First Name: {user.first_name}"
+            f"\n3. Last Name: {user.last_name}\n4. Gender: {user.gender}"
+            f"\n5. Phone No: {user.phone_no}\n6. Password: {user.password}"
+            f"\n7. Account Balance: {user.account_balance}\n8. Account Type: {user.account_type}"
+            f"\n9. Date Created: {user.date_created}\n10. Date of Birth: {user.date_of_birth}"
+            f"\n11. Country: {user.country}\n12. City: {user.city}"
         )
 
     @staticmethod

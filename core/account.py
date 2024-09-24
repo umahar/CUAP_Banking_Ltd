@@ -39,11 +39,8 @@ class Account:
 
     @staticmethod
     def get_account_by_email(email):
+        """this is the function that will return a user object based on email"""
         return Account.accounts_data.get(email)
-    
-    def display_info(self):
-        print(f"{self.first_name}{self.account_balance}")
-    
 
     @staticmethod
     def register_user():
@@ -82,10 +79,15 @@ class Account:
             country,
             city,
         )
-    
-        file = open("data/user_accounts_data.txt", "a", encoding="UTF-8")
-        file.write(f"{new_account.email} {new_account.first_name} {new_account.last_name} {new_account.gender} {new_account.email} {new_account.phone_no} {new_account.password} {new_account.account_balance} {new_account.account_type} {new_account.date_created.strftime("%Y-%m-%d")} {new_account.date_of_birth} {new_account.country} {new_account.city}" + "\n")
-        file.close()
+        with open("data/user_accounts_data.txt", "a", encoding="UTF-8") as file:
+            file.write(
+                    f"{new_account.email} {new_account.first_name} {new_account.last_name}"
+                    f" {new_account.gender} {new_account.email} {new_account.phone_no}"
+                    f" {new_account.password} {new_account.account_balance}"
+                    f" {new_account.account_type}"
+                    f" {new_account.date_created.strftime("%Y-%m-%d")} {new_account.date_of_birth}"
+                    f" {new_account.country} {new_account.city} + '\n'"
+                       )
         return new_account
 
     @staticmethod
@@ -103,12 +105,11 @@ class Account:
             if user.password == password:
                 return user
         return False
-    
     @staticmethod
     def load_data():
         """this functions is called on the start of program and it loads
         all data saved in the file to a dict"""
-        with open('data/user_accounts_data.txt',"r", encoding="UTF-8") as fp:  
+        with open('data/user_accounts_data.txt',"r", encoding="UTF-8") as fp:
             lines = fp.readlines()
             for line in lines:
                 print(lines.index(line)+1,":",line, end='')
@@ -139,17 +140,22 @@ class Account:
                     country,
                     city,)
                 new_account.date_created = date_created
-
     @staticmethod
     def update_new_value(user,item_to_edit,updated_value):
         """this function takes the updated value and stores
-        it in dict and and calls for file update"""      
+        it in dict and and calls for file update"""
         setattr(user,item_to_edit,updated_value)
-        file = open("data/user_accounts_data.txt", "w", encoding="UTF-8")
-        for email in Account.accounts_data:
-            new_account=Account.accounts_data.get(email)
-            file.write(f"{new_account.email} {new_account.first_name} {new_account.last_name} {new_account.gender} {new_account.email} {new_account.phone_no} {new_account.password} {new_account.account_balance} {new_account.account_type} {new_account.date_created} {new_account.date_of_birth} {new_account.country} {new_account.city}" + "\n")
-        file.close()
+        with open("data/user_accounts_data.txt", "w", encoding="UTF-8") as file:
+            for email in Account.accounts_data:
+                new_account=Account.accounts_data.get(email)
+                file.write(
+                    f"{new_account.email} {new_account.first_name} {new_account.last_name}"
+                    f" {new_account.gender} {new_account.email} {new_account.phone_no}"
+                    f" {new_account.password} {new_account.account_balance}"
+                    f" {new_account.account_type}"
+                    f" {new_account.date_created.strftime("%Y-%m-%d")} {new_account.date_of_birth}"
+                    f" {new_account.country} {new_account.city} + '\n'"
+                    )
 
     @staticmethod
     def handle_edit(user, item_to_edit, prompt):
@@ -171,4 +177,3 @@ class Account:
                 f" '{old_data}' to '{new_data}'{prompts.DASHES}"
             )
             print(prompts.UPDATE_SUCCESSFUL)
-    
