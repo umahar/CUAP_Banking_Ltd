@@ -88,7 +88,8 @@ class Account:
                     f" {new_account.password} {new_account.initial_deposit}"
                     f" {new_account.account_type}"
                     f" {new_account.date_created} {new_account.date_of_birth}"
-                    f" {new_account.country} {new_account.city} {new_account.balance.get_balance()}\n"
+                    f" {new_account.country} {new_account.city}"
+                    f" {new_account.balance.get_balance()}\n"
                        )
         return new_account
 
@@ -149,8 +150,9 @@ class Account:
         """this function takes the updated value and stores
         it in dict and and calls for file update"""
         #making a copy of data
-        # open both files 
-        with open('data/user_accounts_data.txt','r', encoding="UTF-8") as first_file, open('data/temp_data.txt','a', encoding="UTF-8") as second_file:
+        # open both files
+        with open('data/user_accounts_data.txt','r', encoding="UTF-8") as first_file,\
+            open('data/temp_data.txt','a', encoding="UTF-8") as second_file:
             second_file.write("\n")
             for line in first_file:
                 second_file.write(line)
@@ -165,7 +167,8 @@ class Account:
                     f" {new_account.password} {new_account.initial_deposit}"
                     f" {new_account.account_type}"
                     f" {new_account.date_created} {new_account.date_of_birth}"
-                    f" {new_account.country} {new_account.city} {new_account.balance.get_balance()}\n"
+                    f" {new_account.country} {new_account.city}"
+                    f" {new_account.balance.get_balance()}\n"
                     )
 
     @staticmethod
