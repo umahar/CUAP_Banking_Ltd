@@ -28,8 +28,8 @@ class AccountFunctions:
         """get the user details based on an email and prints them one by one"""
         print(
             f"Email: {user.email}\nFirst Name: {user.first_name}"
-            f"\nLast Name: {user.last_name}\nBalance: \
-                {user.balance.get_balance()}\nGender: {user.gender}"
+            f"\nLast Name: {user.last_name}\nBalance: {user.balance.get_balance()}\
+                \nAccount Number: {user.account_number.get_account_number()} \nGender: {user.gender}"
             f"\nPhone No: {user.phone_no}\nPassword: {user.password}"
             f"\nInitial Deposit: {user.initial_deposit}\nAccount Type: {user.account_type}"
             f"\nDate Created: {user.date_created}\nDate of Birth: {user.date_of_birth}"

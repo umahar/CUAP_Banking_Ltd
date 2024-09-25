@@ -149,3 +149,11 @@ test2@daxno.com Umair Abulla Male test2@daxno.com 03225097062 Umair4200@ 43434 C
 contact@daxno.com Daxno Technologies Other contact@daxno.com 03185358322 Daxno@5345 5000 Current 2024-09-24 2021-06-15 PK RWP 5100.0
 test100@gmail.com Umair Chaoudary Male test100@gmail.com 03225097962 Umair4200@ 4848 Current 2024-09-24 1999-10-10 PK ss 4848.0
 finaltest@gmail.com Umair Abdullah Male finaltest@gmail.com 03005113021 Umair4200@ 8400 Saving 2024-09-24 1985-10-15 US ISB 8500.0
+
+umairabdullah@gmail.com Umair Abdullah Male umairabdullah@gmail.com 03225097962 Umair4200@ 5000 Current 2024-09-21 1999-11-08 Pakistan Rawalpindi 500.0 100001
+ahmedbukhsh@gmail.com Ahmed Bukhsh Male ahmedbukhsh@gmail.com 03005113021 Ahmed4200@ 8000 Current 2024-09-21 1965-12-12 Pakistan Islamabad 846.0 100002
+sobiaahmed@gmail.com Sobia Ahmed Female sobiaahmed@gmail.com 03447499500 Sobia4200@ 851 Saving 2024-09-21 1972-02-09 Pakistan Rawalpindi 11232.0 100003
+haris@gmail.com Muhammad Haris Male haris@gmail.com 03145358322 Haris4200@ 97432 Current 2024-09-21 2005-12-31 Pakistan Rawalpindi 8636.0 100004
+kainatahmed@gmail.com Kainat Ahmed Female kainatahmed@gmail.com 03355113021 Kainat4200@ 9865 Saving 2024-09-21 1997-04-27 Pakistan Bhalwal 6662.0 100005
+irtazaali@gmail.com Irtaza Ali Male irtazaali@gmail.com 0312123456789 Irtaza123@ 80400 Saving 2024-09-22 2000-05-29 Pakistan Rawalpindi 1085.0 100006
+contact@daxno.com Daxno Technologies Other contact@daxno.com 03185358322 Daxno@5345 5000 Current 2024-09-24 2021-06-15 PK RWP 5100.0 100007testaccnum@gmail.com Test AccNum Male testaccnum@gmail.com 03005113021 Test123@ 8000 Current 2024-09-26 2012-12-12 PK RWP 8000.0 320128

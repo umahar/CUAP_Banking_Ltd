@@ -2,6 +2,7 @@
 
 from datetime import datetime
 from core.account_balance import Balance
+from core.account_number import AccountNumber
 from data import prompts
 from utils.input_handler import UserInputHandler
 
@@ -37,6 +38,7 @@ class Account:
         self.country = country
         self.city = city
         self.balance = Balance(initial_deposit)
+        self.account_number = AccountNumber()
         Account.accounts_data[self.email]=self
 
     @staticmethod
@@ -89,7 +91,7 @@ class Account:
                     f" {new_account.account_type}"
                     f" {new_account.date_created} {new_account.date_of_birth}"
                     f" {new_account.country} {new_account.city}"
-                    f" {new_account.balance.get_balance()}\n"
+                    f" {new_account.balance.get_balance()} {new_account.account_number.get_account_number()}\n"
                        )
         return new_account
 
@@ -131,6 +133,7 @@ class Account:
                 country = dp[11]
                 city = dp[12]
                 balance = dp[13]
+                acc_num = dp[14]
                 new_account = Account(
                     email,
                     phone_no,
@@ -143,6 +146,7 @@ class Account:
                     date_of_birth,
                     country,
                     city,)
+                new_account.account_number.set_account_number(acc_num)
                 new_account.date_created = date_created
                 new_account.balance.set_balance(balance)
     @staticmethod
@@ -168,7 +172,7 @@ class Account:
                     f" {new_account.account_type}"
                     f" {new_account.date_created} {new_account.date_of_birth}"
                     f" {new_account.country} {new_account.city}"
-                    f" {new_account.balance.get_balance()}\n"
+                    f" {new_account.balance.get_balance()} {new_account.account_number.get_account_number()}\n"
                     )
 
     @staticmethod
