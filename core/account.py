@@ -57,10 +57,10 @@ class Account:
         first_name = UserInputHandler.get_valid_first_name("Enter your First Name: ")
         last_name = UserInputHandler.get_valid_last_name("Enter your Last Name: ")
         gender = UserInputHandler.get_valid_gender(
-            "Enter your gender (Male/Female/Other): "
+            "Enter your Gender (Male/Female/Other): "
         )
         initial_deposit = UserInputHandler.get_valid_initial_deposit(
-            "Enter your initial Deposit: "
+            "Enter your Initial Deposit: "
         )
         account_type = UserInputHandler.get_valid_account_type(
             """Enter your Account type("Current", "Saving", "Other"): """
@@ -68,8 +68,8 @@ class Account:
         date_of_birth = UserInputHandler.get_valid_date_of_birth(
             "Enter your Date of Birth (YYYY-MM-DD): "
         )
-        country = UserInputHandler.get_valid_country("Enter name of your Country: ")
-        city = UserInputHandler.get_valid_city("Enter name of your City: ")
+        country = UserInputHandler.get_valid_country("Enter the name of your Country: ")
+        city = UserInputHandler.get_valid_city("Enter the name of your City: ")
         new_account = Account(
             email,
             phone_no,
@@ -91,7 +91,8 @@ class Account:
                     f" {new_account.account_type}"
                     f" {new_account.date_created} {new_account.date_of_birth}"
                     f" {new_account.country} {new_account.city}"
-                    f" {new_account.balance.get_balance()} {new_account.account_number.get_account_number()}\n"
+                    f" {new_account.balance.get_balance()}\
+                        {new_account.account_number.get_account_number()}\n"
                        )
         return new_account
 

@@ -8,31 +8,46 @@ from core.account_functions import AccountFunctions
 from utils.input_handler import UserInputHandler
 
 
+def exit_program():
+    """kills the program"""
+    print(prompts.EXIT)
+    return True
+
+
+def handle_login():
+    """handles login for user"""
+    email = UserInputHandler.get_valid_email("Enter your account Email to Login: ")
+    password = input("Enter your Account Password: ")
+    user = Account.login_user(email, password)
+    if user:
+        print(prompts.LOGIN_SUCCESS)
+        display_login_menu(user)
+    else:
+        print(prompts.LOGIN_FAILED)
+
+
+def handle_register():
+    """handles register for new user"""
+    user = Account.register_user()
+    if user:
+        print(prompts.REGISTER_SUCCESS)
+        display_login_menu(user)
+    else:
+        print(prompts.REGISTER_FAILED)
+
+
 def display_main_menu():
     """Main function to handle menu options."""
     while True:
         opt = AccountFunctions.get_user_option(prompts.WELCOME_TEXT, main_menu_options)
-        if opt == 0:
-            print(prompts.EXIT)
-            break
-        if opt == 1:
-            email = UserInputHandler.get_valid_email(
-                "Enter your account Email to login: "
-            )
-            password = input("Enter your account Password: ")
-            user = Account.login_user(email, password)
-            if user:
-                print(prompts.LOGIN_SUCCESS)
-                display_login_menu(user)
-            else:
-                print(prompts.LOGIN_FAILED)
-        elif opt == 2:
-            user = Account.register_user()
-            if user:
-                print(prompts.REGISTER_SUCCESS)
-                display_login_menu(user)
-            else:
-                print(prompts.REGISTER_FAILED)
+        func_map = {
+            0: exit_program,
+            1: handle_login,
+            2: handle_register,
+        }
+        if opt in func_map:
+            if func_map[opt]():
+                break
         else:
             print(prompts.INVALID_INPUT_TEXT)
 
@@ -49,34 +64,24 @@ def display_login_menu(user):
             ),
             login_menu_options,
         )
-        if opt in (0, 9):
-            print(prompts.LOGOUT)
+        func_map = {
+            1: AccountFunctions.handle_my_details,
+            2: AccountFunctions.handle_edit_details,
+            3: AccountFunctions.handle_check_balance,
+            4: AccountFunctions.handle_deposit_money,
+            5: AccountFunctions.handle_withdraw_money,
+            6: AccountFunctions.handle_change_pin,
+            7: AccountFunctions.handle_my_cards,
+            8: AccountFunctions.handle_transfer_money,
+            9: AccountFunctions.handle_notifications,
+            10: AccountFunctions.handle_account_statement,
+            11: AccountFunctions.handle_account_investments,
+        }
+        if opt in (0, 12):
             break
-        if opt == 1:
-            print(prompts.MY_DETAILS)
-            AccountFunctions.display_user_details(user)
-        elif opt == 2:
-            AccountFunctions.edit_user_details(user)
-        elif opt == 3:
-            print(prompts.CURRENT_BALANCE.format(user.balance.get_balance()))
-        elif opt == 4:
-            print(prompts.CURRENT_BALANCE.format(user.balance.get_balance()))
-            amount = UserInputHandler.get_valid_initial_deposit(
-                "Enter your Deposit Amount: "
-            )
-            user.balance.deposit(amount)
-            print(prompts.CURRENT_BALANCE.format(user.balance.get_balance()))
-            print(prompts.DEPOSIT_SUCCESSFUL)
-        elif opt == 5:
-            print(prompts.CURRENT_BALANCE.format(user.balance.get_balance()))
-            amount = UserInputHandler.get_valid_initial_deposit(
-                "Enter your WithDrawl Amount: "
-            )
-            if user.balance.withdraw(amount):
-                print(prompts.CURRENT_BALANCE.format(user.balance.get_balance()))
-                print(prompts.WITHDRAW_SUCCESSFUL)
-            else:
-                print(prompts.INSUFFICIENT_BALANCE)
+        if opt in func_map:
+            if func_map[opt](user):
+                break
         else:
             print(prompts.INVALID_INPUT_TEXT)
 

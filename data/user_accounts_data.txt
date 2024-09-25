@@ -5,4 +5,5 @@ haris@gmail.com Muhammad Haris Male haris@gmail.com 03145358322 Haris4200@ 97432
 kainatahmed@gmail.com Kainat Ahmed Female kainatahmed@gmail.com 03355113021 Kainat4200@ 9865 Saving 2024-09-21 1997-04-27 Pakistan Bhalwal 6662.0 100005
 irtazaali@gmail.com Irtaza Ali Male irtazaali@gmail.com 0312123456789 Irtaza123@ 80400 Saving 2024-09-22 2000-05-29 Pakistan Rawalpindi 1085.0 100006
 contact@daxno.com Daxno Technologies Other contact@daxno.com 03185358322 Daxno@5345 5000 Current 2024-09-24 2021-06-15 PK RWP 5100.0 100007
-testaccnum@gmail.com Test AccNum Female testaccnum@gmail.com 03005113021 Test123@ 8000 Current 2024-09-26 2012-12-12 PK RWP 8000.0 320128
+testaccnum@gmail.com Test dfdf Female testaccnum@gmail.com 03005113021 Test123@ 8000 Current 2024-09-26 2012-12-12 PK RWP 7930.0 320128
+newT@gmail.com Test New Male newT@gmail.com 03005113021 Test123@ 7826 Current 2024-09-26 1955-10-12 PK FS 7826.0 934128
