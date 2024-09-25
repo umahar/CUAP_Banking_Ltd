@@ -1,9 +1,6 @@
 """This file contains diff kinds of options for menus"""
 
-main_menu_options = [
-    "Login Account",
-    "Register a new Account",
-]
+main_menu_options = ["Login Account", "Register a new Account", "Pay a Bill"]
 
 
 login_menu_options = [
@@ -12,8 +9,18 @@ login_menu_options = [
     "Check Balance",
     "Deposit Money",
     "Withdraw Money",
-    "Pay a Bill",
+    "Change PIN",
+    "My Cards",
     "Transfer Money",
     "Notifications",
+    "Account Statement",
+    "Investments",
     "Log Out",
 ]
+# Account PIN
+# Account Nos
+# Debit/Credit Cards
+# Pay Bills using cards
+# Transaction Receipt
+# Admin Dashboard
+#

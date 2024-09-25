@@ -1,7 +1,7 @@
 """This is the account class that will manage all user accounts"""
 
 from datetime import datetime
-from core.balance import Balance
+from core.account_balance import Balance
 from data import prompts
 from utils.input_handler import UserInputHandler
 
