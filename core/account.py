@@ -24,6 +24,7 @@ class Account:
         date_of_birth,
         country,
         city,
+        pin
     ):
         self.email = email
         self.phone_no = phone_no
@@ -37,6 +38,7 @@ class Account:
         self.date_of_birth = date_of_birth
         self.country = country
         self.city = city
+        self.pin = pin
         self.balance = Balance(initial_deposit)
         self.account_number = AccountNumber()
         Account.accounts_data[self.email]=self
@@ -63,6 +65,7 @@ class Account:
         if Account.is_old_user(email):
             return False
         password = UserInputHandler.get_valid_password("Enter your Password: ")
+        pin = UserInputHandler.get_valid_pin("Enter your Pin Code: ")
         phone_no = UserInputHandler.get_valid_phone_no("Enter your Phone No: ")
         first_name = UserInputHandler.get_valid_first_name("Enter your First Name: ")
         last_name = UserInputHandler.get_valid_last_name("Enter your Last Name: ")
@@ -92,6 +95,7 @@ class Account:
             date_of_birth,
             country,
             city,
+            pin
         )
         Account.write_data("data/user_accounts_data.txt",'a',new_account)
         return new_account
@@ -108,7 +112,7 @@ class Account:
                     f" {new_account.date_created} {new_account.date_of_birth}"
                     f" {new_account.country} {new_account.city}"
                     f" {new_account.balance.get_balance()}"
-                    f" {new_account.account_number.get_account_number()}\n"
+                    f" {new_account.account_number.get_account_number()} {new_account.pin}\n"
                        )
     
     @staticmethod
@@ -119,6 +123,16 @@ class Account:
         return False
 
     @staticmethod
+    def validate_pin(email, pin):
+        """this functions checks for a duplicate email and authenticates the user and logins user"""
+        user = Account.get_account_by_email(email)
+        if user:
+            if int(user.pin) == pin:
+                print(prompts.VALIDATION_SUCCESS)
+                return True
+        return False
+    
+    @staticmethod
     def login_user(email, password):
         """this functions checks for a duplicate email and authenticates the user and logins user"""
         user = Account.get_account_by_email(email)
@@ -126,8 +140,8 @@ class Account:
             if user.password == password:
                 return user
         return False
-    @staticmethod
     
+    @staticmethod
     def load_data():
         """this functions is called on the start of program and it loads
         all data saved in the file to a dict"""
@@ -151,6 +165,7 @@ class Account:
                 city = dp[12]
                 balance = dp[13]
                 acc_num = dp[14]
+                pin = dp[15]
                 new_account = Account(
                     email,
                     phone_no,
@@ -162,10 +177,12 @@ class Account:
                     account_type,
                     date_of_birth,
                     country,
-                    city,)
+                    city,
+                    pin)
                 new_account.account_number.set_account_number(int(acc_num))
                 new_account.date_created = date_created
                 new_account.balance.set_balance(balance)
+    
     @staticmethod
     def update_new_value(user='null',item_to_edit='balance',updated_value='null'):
         """this function takes the updated value and stores
@@ -189,7 +206,8 @@ class Account:
                     f" {new_account.account_type}"
                     f" {new_account.date_created} {new_account.date_of_birth}"
                     f" {new_account.country} {new_account.city}"
-                    f" {new_account.balance.get_balance()} {new_account.account_number.get_account_number()}\n"
+                    f" {new_account.balance.get_balance()} {new_account.account_number.get_account_number()}"
+                    f" {new_account.pin}\n"
                     )
 
     @staticmethod

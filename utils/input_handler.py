@@ -151,3 +151,13 @@ class UserInputHandler:
             if acc_num.isdigit() and 100000 <= int(acc_num) <= 999999:
                 return int(acc_num)
             print(prompts.INV_ACCOUNT_NUMBER)
+
+    @staticmethod
+    def get_valid_pin(prompt):
+        """checks for a valid  4 digit pin"""
+        while True:
+            pin = input(prompt)
+            # Check if the pin is exactly 4 digits and is numeric
+            if pin.isdigit() and len(pin) == 4:
+                return int(pin)
+            print(prompts.INVALID_PIN)

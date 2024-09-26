@@ -18,9 +18,7 @@ login_menu_options = [
     "Log Out",
 ]
 # Account PIN
-# Account Nos
 # Debit/Credit Cards
 # Pay Bills using cards
 # Transaction Receipt
 # Admin Dashboard
-#

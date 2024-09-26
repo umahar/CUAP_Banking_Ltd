@@ -30,6 +30,3 @@ class Balance:
             account.Account.update_new_value()
             return True
         return False
-
-    def transfer(self):
-        """transfers money from self acc to another"""

@@ -34,7 +34,11 @@ class AccountFunctions:
     @staticmethod
     def handle_edit_details(user):
         """the function handles the user function of Edit Details"""
-        AccountFunctions.edit_user_details(user)
+        pin = UserInputHandler.get_valid_pin("Enter your PIN Code: ")
+        if Account.validate_pin(user.email, pin):
+            AccountFunctions.edit_user_details(user)
+        else:
+            print(prompts.WRONG_PIN)
 
     @staticmethod
     def handle_check_balance(user):
@@ -48,9 +52,13 @@ class AccountFunctions:
         amount = UserInputHandler.get_valid_initial_deposit(
             "Enter your Deposit Amount: "
         )
-        user.balance.deposit(amount)
-        print(prompts.CURRENT_BALANCE.format(user.balance.get_balance()))
-        print(prompts.DEPOSIT_SUCCESSFUL)
+        pin = UserInputHandler.get_valid_pin("Enter your PIN Code: ")
+        if Account.validate_pin(user.email, pin):
+            user.balance.deposit(amount)
+            print(prompts.CURRENT_BALANCE.format(user.balance.get_balance()))
+            print(prompts.DEPOSIT_SUCCESSFUL)
+        else:
+            print(prompts.WRONG_PIN)
 
     @staticmethod
     def handle_withdraw_money(user):
@@ -59,15 +67,24 @@ class AccountFunctions:
         amount = UserInputHandler.get_valid_initial_deposit(
             "Enter your Withdrawal Amount: "
         )
-        if user.balance.withdraw(amount):
-            print(prompts.CURRENT_BALANCE.format(user.balance.get_balance()))
-            print(prompts.WITHDRAW_SUCCESSFUL)
+        pin = UserInputHandler.get_valid_pin("Enter your PIN Code: ")
+        if Account.validate_pin(user.email, pin):
+            if user.balance.withdraw(amount):
+                print(prompts.CURRENT_BALANCE.format(user.balance.get_balance()))
+                print(prompts.WITHDRAW_SUCCESSFUL)
+            else:
+                print(prompts.INSUFFICIENT_BALANCE)
         else:
-            print(prompts.INSUFFICIENT_BALANCE)
+            print(prompts.WRONG_PIN)
 
     @staticmethod
     def handle_change_pin(user):
         """the function handles the user function of change_pin"""
+        pin = UserInputHandler.get_valid_pin("Enter your current PIN Code: ")
+        if Account.validate_pin(user.email, pin):
+            Account.handle_edit(user, "pin", "Enter your new PIN Code: ")
+        else:
+            print(prompts.WRONG_PIN)
 
     @staticmethod
     def handle_my_cards(user):
@@ -101,13 +118,19 @@ class AccountFunctions:
                         "Do you wish to Proceed with the Transfer? ", options
                     )
                     if opt == 1:
-                        print(prompts.CONFIRM_TRANSFER)
-                        sender.balance.withdraw(amount_to_send)
-                        receiver.balance.deposit(amount_to_send)
-                        print(prompts.TRANSFER_COMPLETE)
-                        print(
-                            prompts.CURRENT_BALANCE.format(sender.balance.get_balance())
-                        )
+                        pin = UserInputHandler.get_valid_pin("Enter your PIN Code: ")
+                        if Account.validate_pin(user.email, pin):
+                            print(prompts.CONFIRM_TRANSFER)
+                            sender.balance.withdraw(amount_to_send)
+                            receiver.balance.deposit(amount_to_send)
+                            print(prompts.TRANSFER_COMPLETE)
+                            print(
+                                prompts.CURRENT_BALANCE.format(
+                                    sender.balance.get_balance()
+                                )
+                            )
+                        else:
+                            print(prompts.WRONG_PIN)
                     if opt == 2:
                         print(prompts.TRANSFER_INCOMPLETE)
                 else:
@@ -134,7 +157,7 @@ class AccountFunctions:
             f"Email: {user.email}\nFirst Name: {user.first_name}"
             f"\nLast Name: {user.last_name}\nBalance: {user.balance.get_balance()}"
             f"\nAccount Number: {user.account_number.get_account_number()} \nGender: {user.gender}"
-            f"\nPhone No: {user.phone_no}\nPassword: {user.password}"
+            f"\nPhone No: {user.phone_no}\nPassword: {user.password}\nPIN: {user.pin}"
             f"\nInitial Deposit: {user.initial_deposit}\nAccount Type: {user.account_type}"
             f"\nDate Created: {user.date_created}\nDate of Birth: {user.date_of_birth}"
             f"\nCountry: {user.country}\nCity: {user.city}"
