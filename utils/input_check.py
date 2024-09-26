@@ -40,6 +40,13 @@ class CheckInput:
         return re.match(name_regex, name) is not None
 
     @staticmethod
+    def is_valid_transfer_amount(transfer_amount, balance):
+        """checks if user has balance to make a transfer"""
+        if transfer_amount > balance:
+            return False
+        return True
+
+    @staticmethod
     def is_valid_deposit(initial_deposit):
         """function to check if account balance is valid"""
         try:

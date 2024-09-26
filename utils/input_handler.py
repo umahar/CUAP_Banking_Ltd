@@ -82,6 +82,19 @@ class UserInputHandler:
         return deposit
 
     @staticmethod
+    def get_valid_transfer_amount(prompt, current_balance):
+        """gets valid amount to transfer to someone"""
+        while True:
+            amount = input(prompt)
+            if not CheckInput.is_valid_deposit(amount):
+                print(prompts.INV_TRANSFER_AMOUNT)
+                continue
+            if not CheckInput.is_valid_transfer_amount(float(amount), current_balance):
+                print(prompts.INSUFFICIENT_BALANCE)
+                continue
+            return amount
+
+    @staticmethod
     def get_valid_gender(prompt):
         """this function will prompt the user to keep entering gender
         and validating it until its correct"""
@@ -129,3 +142,7 @@ class UserInputHandler:
             )
             name = input(prompt)
         return name
+
+    @staticmethod
+    def get_valid_account_number(prompt):
+        pass

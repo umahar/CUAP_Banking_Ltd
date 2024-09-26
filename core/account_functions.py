@@ -75,6 +75,13 @@ class AccountFunctions:
     @staticmethod
     def handle_transfer_money(user):
         """the function handles the user function of transfer_money"""
+        sender = user
+        sender_balance = sender.balance.get_balance()
+        print(prompts.CURRENT_BALANCE.format(sender_balance))
+        amount_to_send = UserInputHandler.get_valid_transfer_amount(
+            "Enter the amount to Transfer: ", sender_balance
+        )
+        print("Valid", amount_to_send)
 
     @staticmethod
     def handle_notifications(user):
