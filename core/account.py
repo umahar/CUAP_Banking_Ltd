@@ -83,9 +83,13 @@ class Account:
             country,
             city,
         )
-        print(new_account.account_number)
-        print(new_account.account_number.get_account_number())
-        with open("data/user_accounts_data.txt", "a", encoding="UTF-8") as file:
+        Account.write_data("data/user_accounts_data.txt",'a',new_account)
+        return new_account
+    
+    @staticmethod
+    def write_data(path,mode,new_account):
+        '''func to write all data of a user into file'''
+        with open(path, mode, encoding="UTF-8") as file:
             file.write(
                     f"{new_account.email} {new_account.first_name} {new_account.last_name}"
                     f" {new_account.gender} {new_account.email} {new_account.phone_no}"
@@ -96,8 +100,7 @@ class Account:
                     f" {new_account.balance.get_balance()}"
                     f" {new_account.account_number.get_account_number()}\n"
                        )
-        return new_account
-
+    
     @staticmethod
     def is_old_user(email):
         """This functions checks if the user already has an account"""
@@ -114,6 +117,7 @@ class Account:
                 return user
         return False
     @staticmethod
+    
     def load_data():
         """this functions is called on the start of program and it loads
         all data saved in the file to a dict"""
