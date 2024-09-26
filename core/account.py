@@ -83,6 +83,8 @@ class Account:
             country,
             city,
         )
+        print(new_account.account_number)
+        print(new_account.account_number.get_account_number())
         with open("data/user_accounts_data.txt", "a", encoding="UTF-8") as file:
             file.write(
                     f"{new_account.email} {new_account.first_name} {new_account.last_name}"
@@ -91,8 +93,8 @@ class Account:
                     f" {new_account.account_type}"
                     f" {new_account.date_created} {new_account.date_of_birth}"
                     f" {new_account.country} {new_account.city}"
-                    f" {new_account.balance.get_balance()}\
-                        {new_account.account_number.get_account_number()}\n"
+                    f" {new_account.balance.get_balance()}"
+                    f" {new_account.account_number.get_account_number()}\n"
                        )
         return new_account
 
