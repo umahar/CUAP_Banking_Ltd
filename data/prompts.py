@@ -49,3 +49,9 @@ INSUFFICIENT_BALANCE = f"\n{DASHES}ERROR:Insufficient Balance.{DASHES}\n"
 INV_TRANSFER_AMOUNT = (
     f"\n{DASHES}ERROR:Invalid Transfer Amount. Please enter again{DASHES}\n"
 )
+INV_ACCOUNT_NUMBER = f"\n{DASHES}ERROR:Invalid Account Number. \
+Please enter a valid 6-digit account number.{DASHES}\n"
+NO_ACCOUNT_FOUND = f"\n{DASHES}ERROR:Account Not Found.{DASHES}\n"
+TRANSFER_COMPLETE = f"\n{DASHES}MONEY TRANSFERRED SUCCESSFULLY{DASHES}\n"
+CONFIRM_TRANSFER = f"\n{DASHES}INITIATING TRANSFER{DASHES}\n"
+TRANSFER_INCOMPLETE = f"\n{DASHES}ERROR:Transfer Cancelled{DASHES}\n"

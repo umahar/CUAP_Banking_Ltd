@@ -29,3 +29,10 @@ class AccountNumber:
             if acc_num not in AccountNumber.user_account_numbers:
                 AccountNumber.user_account_numbers.add(acc_num)
                 return acc_num
+
+    @staticmethod
+    def is_account_number(acc_num):
+        """checks if a given acc num is in the set of account numbers"""
+        if acc_num in AccountNumber.user_account_numbers:
+            return True
+        return False

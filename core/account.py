@@ -47,6 +47,16 @@ class Account:
         return Account.accounts_data.get(email)
 
     @staticmethod
+    def get_account_by_acc_num(rec_acc_num):
+        '''finds an account user based on account number'''
+        for email in Account.accounts_data:
+            user = Account.get_account_by_email(email)
+            user_acc_num = int(user.account_number.get_account_number())
+            if rec_acc_num == user_acc_num:
+                return user
+        return False
+
+    @staticmethod
     def register_user():
         """Handle user registration."""
         email = UserInputHandler.get_valid_email("Enter your Email to register: ")
@@ -153,7 +163,7 @@ class Account:
                     date_of_birth,
                     country,
                     city,)
-                new_account.account_number.set_account_number(acc_num)
+                new_account.account_number.set_account_number(int(acc_num))
                 new_account.date_created = date_created
                 new_account.balance.set_balance(balance)
     @staticmethod

@@ -145,4 +145,9 @@ class UserInputHandler:
 
     @staticmethod
     def get_valid_account_number(prompt):
-        pass
+        """checks for a valid acc num entry"""
+        while True:
+            acc_num = input(prompt)
+            if acc_num.isdigit() and 100000 <= int(acc_num) <= 999999:
+                return int(acc_num)
+            print(prompts.INV_ACCOUNT_NUMBER)

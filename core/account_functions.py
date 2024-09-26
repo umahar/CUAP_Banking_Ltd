@@ -1,6 +1,7 @@
 """this class manages auxillary functions to do tasks"""
 
 from core.account import Account
+from core.account_number import AccountNumber
 from data import prompts
 from utils.input_handler import UserInputHandler
 
@@ -76,12 +77,43 @@ class AccountFunctions:
     def handle_transfer_money(user):
         """the function handles the user function of transfer_money"""
         sender = user
+        sender_acc_num = sender.account_number.get_account_number()
         sender_balance = sender.balance.get_balance()
         print(prompts.CURRENT_BALANCE.format(sender_balance))
         amount_to_send = UserInputHandler.get_valid_transfer_amount(
             "Enter the amount to Transfer: ", sender_balance
         )
-        print("Valid", amount_to_send)
+        rec_acc_num = UserInputHandler.get_valid_account_number(
+            "Enter the Account Number of the recipient: "
+        )
+        if sender_acc_num == rec_acc_num:
+            print(prompts.INV_ACCOUNT_NUMBER)
+        elif sender_acc_num != rec_acc_num:
+            if AccountNumber.is_account_number(rec_acc_num):
+                # get the receiver user
+                receiver = Account.get_account_by_acc_num(rec_acc_num)
+                if receiver:
+                    print(
+                        f"\nRecipient Account Title: {receiver.first_name.title()} {receiver.last_name.title()}"
+                    )
+                    options = ["YES", "NO"]
+                    opt = AccountFunctions.get_user_option(
+                        "Do you wish to Proceed with the Transfer? ", options
+                    )
+                    if opt == 1:
+                        print(prompts.CONFIRM_TRANSFER)
+                        sender.balance.withdraw(amount_to_send)
+                        receiver.balance.deposit(amount_to_send)
+                        print(prompts.TRANSFER_COMPLETE)
+                        print(
+                            prompts.CURRENT_BALANCE.format(sender.balance.get_balance())
+                        )
+                    if opt == 2:
+                        print(prompts.TRANSFER_INCOMPLETE)
+                else:
+                    print(prompts.NO_ACCOUNT_FOUND)
+        else:
+            print(prompts.NO_ACCOUNT_FOUND)
 
     @staticmethod
     def handle_notifications(user):
