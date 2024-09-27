@@ -2,6 +2,7 @@
 
 from datetime import datetime
 from core.account_balance import Balance
+from core.account_card import AccountCard
 from core.account_number import AccountNumber
 from data import prompts
 from utils.input_handler import UserInputHandler
@@ -25,7 +26,7 @@ class Account:
         country,
         city,
         pin
-    ):
+    ): 
         self.email = email
         self.phone_no = phone_no
         self.first_name = first_name
@@ -41,6 +42,8 @@ class Account:
         self.pin = pin
         self.balance = Balance(initial_deposit)
         self.account_number = AccountNumber()
+        self.cards = []
+        self.add_card()
         Account.accounts_data[self.email]=self
 
     @staticmethod
@@ -99,7 +102,7 @@ class Account:
         )
         Account.write_data("data/user_accounts_data.txt",'a',new_account)
         return new_account
-    
+
     @staticmethod
     def write_data(path,mode,new_account):
         '''func to write all data of a user into file'''
@@ -114,7 +117,7 @@ class Account:
                     f" {new_account.balance.get_balance()}"
                     f" {new_account.account_number.get_account_number()} {new_account.pin}\n"
                        )
-    
+
     @staticmethod
     def is_old_user(email):
         """This functions checks if the user already has an account"""
@@ -131,7 +134,7 @@ class Account:
                 print(prompts.VALIDATION_SUCCESS)
                 return True
         return False
-    
+
     @staticmethod
     def login_user(email, password):
         """this functions checks for a duplicate email and authenticates the user and logins user"""
@@ -140,7 +143,7 @@ class Account:
             if user.password == password:
                 return user
         return False
-    
+
     @staticmethod
     def load_data():
         """this functions is called on the start of program and it loads
@@ -182,7 +185,25 @@ class Account:
                 new_account.account_number.set_account_number(int(acc_num))
                 new_account.date_created = date_created
                 new_account.balance.set_balance(balance)
-    
+                new_account.cards.clear()
+        with open('data/user_cards_data.txt',"r", encoding="UTF-8") as fp:
+            lines = fp.readlines()
+            for line in lines:
+                print(lines.index(line)+1,":",line, end='')
+                dp = line.split()
+                email = dp[0]
+                # name = f"{dp[1]} {dp[2]}"
+                card_type = dp[3]
+                card_num = f"{dp[4]} {dp[5]} {dp[6]} {dp[7]}"
+                card_issue_date = dp[8]
+                card_expiry_date = dp[9]
+                card_cvv = dp[10]
+                card_limit = dp[11]
+                card_status = dp[12]
+                #create a new card for user
+                user = Account.get_account_by_email(email)
+                card = AccountCard(user,card_type,card_num,card_issue_date,card_expiry_date,card_cvv,card_limit,card_status)
+                user.cards.append(card)
     @staticmethod
     def update_new_value(user='null',item_to_edit='balance',updated_value='null'):
         """this function takes the updated value and stores
@@ -230,3 +251,9 @@ class Account:
                 f" '{old_data}' to '{new_data}'{prompts.DASHES}"
             )
             print(prompts.UPDATE_SUCCESSFUL)
+
+    def add_card(self):
+        '''func to add a new card'''
+        card_holder = self
+        card = AccountCard(card_holder)
+        self.cards.append(card)

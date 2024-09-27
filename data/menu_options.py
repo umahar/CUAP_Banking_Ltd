@@ -17,8 +17,8 @@ login_menu_options = [
     "Investments",
     "Log Out",
 ]
-# Account PIN
 # Debit/Credit Cards
+# cheques
 # Pay Bills using cards
 # Transaction Receipt
 # Admin Dashboard
