@@ -251,3 +251,57 @@ class AccountFunctions:
             pass
         else:
             print(prompts.INVALID_INPUT_TEXT)
+
+    @staticmethod
+    def handle_bill_payment():
+        """handles bill payment for user"""
+        given_card_no = input("Enter your Card Number: ")
+        given_card_name = input("Enter your Card Full Name: ")
+        given_card_expiry = input("Enter your Card Expiry Data: ")
+        given_card_cvv = input("Enter your Card CVV: ")
+
+        user_email = None
+        for email in Account.accounts_data:
+            c_user = Account.get_account_by_email(email)
+            for curr_card in c_user.cards:
+                number = curr_card.card_number
+                name = curr_card.card_name
+                expiry = curr_card.card_expiry_date
+                cvv = curr_card.card_cvv
+                status = curr_card.card_status
+                if number == given_card_no:
+                    print("card no matched")
+                    if name == given_card_name:
+                        print("card name matched")
+                        if expiry == given_card_expiry:
+                            print("card expiry matched")
+                            if str(cvv) == given_card_cvv:
+                                print("card cvv matched")
+                                if status in (
+                                    "Initiated",
+                                    "Temporary-Blocked",
+                                    "Permanent-Blocked",
+                                ):
+                                    print("Card Status Not Activated")
+                                    user_email = None
+                                    break
+                                else:
+                                    print("status active")
+                                    user_email = email
+                                    break
+        if user_email:
+            user = Account.get_account_by_email(user_email)
+            if user.balance.get_balance() < 5000:
+                print(prompts.INSUFFICIENT_BALANCE)
+            else:
+                pin = UserInputHandler.get_valid_pin("Enter your PIN Code: ")
+                if Account.validate_pin(user.email, pin):
+                    if user.balance.withdraw(5000):
+                        print(
+                            prompts.CURRENT_BALANCE.format(user.balance.get_balance())
+                        )
+                        print(prompts.BILL_PAID)
+                else:
+                    print(prompts.WRONG_PIN)
+        else:
+            print("Card details InValid")

@@ -1,5 +1,6 @@
 """This is the main.py The program starts from this file"""
 
+from pydoc import doc
 from data import prompts
 from data.menu_options import main_menu_options
 from data.menu_options import login_menu_options
@@ -36,6 +37,15 @@ def handle_register():
         print(prompts.REGISTER_FAILED)
 
 
+def handle_bill_payment():
+    """function to allow user to pay bills without login"""
+    bill_id = input("Enter your Bill ID: ")
+    if bill_id in Account.bill_ids:
+        AccountFunctions.handle_bill_payment()
+    else:
+        print(prompts.INVALID_BILL_ID)
+
+
 def display_main_menu():
     """Main function to handle menu options."""
     while True:
@@ -44,6 +54,7 @@ def display_main_menu():
             0: exit_program,
             1: handle_login,
             2: handle_register,
+            3: handle_bill_payment,
         }
         if opt in func_map:
             if func_map[opt]():

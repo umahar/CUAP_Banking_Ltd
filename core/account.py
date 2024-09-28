@@ -11,6 +11,7 @@ class Account:
     """This is the account class that will manage all user accounts"""
 
     accounts_data = {}
+    bill_ids =[]
 
     def __init__(
         self,
@@ -151,6 +152,10 @@ class Account:
         """this functions is called on the start of program and it loads
         all data saved in the file to a dict"""
         print("\n------------------- USERS --------------------\n")
+        with open('data/bill_ids.txt',"r", encoding="UTF-8") as fp:
+            lines = fp.readlines()
+            for line in lines:
+                Account.bill_ids.append(line)
         with open('data/user_accounts_data.txt',"r", encoding="UTF-8") as fp:
             lines = fp.readlines()
             for line in lines:
