@@ -49,15 +49,29 @@ class AccountCard:
         if card_type is None:
             self.save_data_to_file()
 
-    def save_data_to_file(self, remove=False):
-        if remove:
-            """need to copy current cards data and rewrite new one"""
-        with open("data/user_cards_data.txt", encoding="UTF-8", mode="a") as file:
-            data = f"{self.card_holder.account_number.get_account_number()} {self.card_name} \
+    def save_data_to_file(self, update=False):
+        if update:
+            with open("data/user_cards_data.txt", "r", encoding="UTF-8") as fp:
+                lines = fp.readlines()
+                updated_lines = []
+                for line in lines:
+                    dp = line.split()
+                    card_num = f"{dp[4]} {dp[5]} {dp[6]} {dp[7]}"
+                    if self.card_number == card_num:
+                        dp[-1] = self.card_status
+                        updated_line = " ".join(dp)
+                    else:
+                        updated_line = line.strip()
+                    updated_lines.append(updated_line + "\n")
+            with open("data/user_cards_data.txt", "w", encoding="UTF-8") as file:
+                file.writelines(updated_lines)
+        else:
+            with open("data/user_cards_data.txt", encoding="UTF-8", mode="a") as file:
+                data = f"{self.card_holder.account_number.get_account_number()} {self.card_name} \
 {self.card_type} {self.card_number} {self.card_issue_date} \
 {self.card_expiry_date} {self.card_cvv} {self.card_limit} \
 {self.card_status}"
-            file.write(data + "\n")
+                file.write(data + "\n")
 
     def generate_card_type(self):
         """generates the card type randomly"""
@@ -119,6 +133,7 @@ class AccountCard:
 
             if self.card_status in ("Initiated", "Temporary Blocked"):
                 self.card_status = "Activated"
+                self.save_data_to_file(update=True)
                 return f"Your Account Card ending with {self.card_number[-4:]} has been Activated."
             if self.card_status == "Permanent Blocked":
                 return "This card is Permanently Blocked. It can not be Activated. Please contact support."
@@ -128,6 +143,7 @@ class AccountCard:
 
             if self.card_status in ("Initiated", "Activated"):
                 self.card_status = "Temporary Blocked"
+                self.save_data_to_file(update=True)
                 return f"Your Account Card ending with {self.card_number[-4:]} has been Temporary Blocked."
             if self.card_status == "Permanent Blocked":
                 return "This card is Permanently Blocked. It can not be Temporarily Block. Please contact support."
@@ -137,7 +153,6 @@ class AccountCard:
 
             if self.card_status in ("Initiated", "Activated", "Temporary Blocked"):
                 self.card_status = "Permanent Blocked"
+                self.save_data_to_file(update=True)
                 return f"Your Account Card ending with {self.card_number[-4:]} has been set to Permanent Blocked."
             return "Your Account Card is already set to Permanent Block."
-
-        self.save_data_to_file()
