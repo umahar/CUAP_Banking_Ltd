@@ -8,7 +8,6 @@ class AccountCard:
     """handles credit/debit cards for users"""
 
     card_numbers = []
-    user_cards = {}
 
     def __init__(
         self,
@@ -71,7 +70,7 @@ class AccountCard:
         count = 0
         while True:
             four_digits = random.randint(1000, 9999)
-            card_num = card_num + " " + four_digits
+            card_num = card_num + " " + str(four_digits)
             count += 1
             if count == 4:
                 if card_num in AccountCard.card_numbers:
@@ -103,3 +102,11 @@ class AccountCard:
     def generate_card_cvv():
         """generates the card cvv"""
         return random.randint(100, 999)
+
+    def show_card_details(self):
+        """displays card details"""
+        data = f"{self.card_holder.email} {self.card_name} \
+{self.card_type} {self.card_number} {self.card_issue_date} \
+{self.card_expiry_date} {self.card_cvv} {self.card_limit} \
+{self.card_status}"
+        print(data)

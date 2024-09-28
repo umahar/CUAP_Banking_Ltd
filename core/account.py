@@ -25,7 +25,8 @@ class Account:
         date_of_birth,
         country,
         city,
-        pin
+        pin,
+        create_card=True
     ): 
         self.email = email
         self.phone_no = phone_no
@@ -43,7 +44,8 @@ class Account:
         self.balance = Balance(initial_deposit)
         self.account_number = AccountNumber()
         self.cards = []
-        self.add_card()
+        if create_card:
+            self.add_card()
         Account.accounts_data[self.email]=self
 
     @staticmethod
@@ -148,6 +150,7 @@ class Account:
     def load_data():
         """this functions is called on the start of program and it loads
         all data saved in the file to a dict"""
+        print("\n------------------- USERS --------------------\n")
         with open('data/user_accounts_data.txt',"r", encoding="UTF-8") as fp:
             lines = fp.readlines()
             for line in lines:
@@ -181,11 +184,12 @@ class Account:
                     date_of_birth,
                     country,
                     city,
-                    pin)
+                    pin,
+                    create_card=False)
                 new_account.account_number.set_account_number(int(acc_num))
                 new_account.date_created = date_created
                 new_account.balance.set_balance(balance)
-                new_account.cards.clear()
+        print("\n------------------- CARDS --------------------\n")
         with open('data/user_cards_data.txt',"r", encoding="UTF-8") as fp:
             lines = fp.readlines()
             for line in lines:

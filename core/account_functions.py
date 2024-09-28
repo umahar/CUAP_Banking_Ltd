@@ -1,6 +1,7 @@
 """this class manages auxillary functions to do tasks"""
 
 from core.account import Account
+from core.account_card import AccountCard
 from core.account_number import AccountNumber
 from data import prompts
 from utils.input_handler import UserInputHandler
@@ -89,6 +90,8 @@ class AccountFunctions:
     @staticmethod
     def handle_my_cards(user):
         """the function handles the user function of my_cards"""
+        for card in user.cards:
+            card.show_card_details()
 
     @staticmethod
     def handle_transfer_money(user):
