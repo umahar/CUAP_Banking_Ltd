@@ -195,7 +195,7 @@ class Account:
             for line in lines:
                 print(lines.index(line)+1,":",line, end='')
                 dp = line.split()
-                email = dp[0]
+                acc_num = dp[0]
                 # name = f"{dp[1]} {dp[2]}"
                 card_type = dp[3]
                 card_num = f"{dp[4]} {dp[5]} {dp[6]} {dp[7]}"
@@ -205,7 +205,7 @@ class Account:
                 card_limit = dp[11]
                 card_status = dp[12]
                 #create a new card for user
-                user = Account.get_account_by_email(email)
+                user = Account.get_account_by_acc_num(int(acc_num))
                 card = AccountCard(user,card_type,card_num,card_issue_date,card_expiry_date,card_cvv,card_limit,card_status)
                 user.cards.append(card)
     @staticmethod
@@ -214,10 +214,14 @@ class Account:
         it in dict and and calls for file update"""
         #making a copy of data
         # open both files
-        with open('data/user_accounts_data.txt','r', encoding="UTF-8") as first_file,\
+        with open('data/user_accounts_data.txt','r', encoding="UTF-8") as accounts_data,\
+            open('data/user_cards_data.txt','r', encoding="UTF-8") as cards_data,\
             open('data/temp_data.txt','a', encoding="UTF-8") as second_file:
             second_file.write("\n")
-            for line in first_file:
+            for line in accounts_data:
+                second_file.write(line)
+            second_file.write("\n")
+            for line in cards_data:
                 second_file.write(line)
         if item_to_edit != 'balance':
             setattr(user,item_to_edit,updated_value)

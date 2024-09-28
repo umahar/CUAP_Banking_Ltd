@@ -51,7 +51,7 @@ class AccountCard:
 
     def save_data_to_file(self):
         with open("data/user_cards_data.txt", encoding="UTF-8", mode="a") as file:
-            data = f"{self.card_holder.email} {self.card_name} \
+            data = f"{self.card_holder.account_number.get_account_number()} {self.card_name} \
 {self.card_type} {self.card_number} {self.card_issue_date} \
 {self.card_expiry_date} {self.card_cvv} {self.card_limit} \
 {self.card_status}"
@@ -105,7 +105,7 @@ class AccountCard:
 
     def show_card_details(self):
         """displays card details"""
-        data = f"{self.card_holder.email} {self.card_name} \
+        data = f"{self.card_holder.email} {self.card_holder.account_number.get_account_number()} {self.card_name} \
 {self.card_type} {self.card_number} {self.card_issue_date} \
 {self.card_expiry_date} {self.card_cvv} {self.card_limit} \
 {self.card_status}"
