@@ -264,44 +264,41 @@ class AccountFunctions:
         for email in Account.accounts_data:
             c_user = Account.get_account_by_email(email)
             for curr_card in c_user.cards:
-                number = curr_card.card_number
-                name = curr_card.card_name
-                expiry = curr_card.card_expiry_date
-                cvv = curr_card.card_cvv
-                status = curr_card.card_status
-                if number == given_card_no:
-                    print("card no matched")
-                    if name == given_card_name:
-                        print("card name matched")
-                        if expiry == given_card_expiry:
-                            print("card expiry matched")
-                            if str(cvv) == given_card_cvv:
-                                print("card cvv matched")
-                                if status in (
-                                    "Initiated",
-                                    "Temporary-Blocked",
-                                    "Permanent-Blocked",
-                                ):
-                                    print("Card Status Not Activated")
-                                    user_email = None
-                                    break
-                                else:
-                                    print("status active")
-                                    user_email = email
-                                    break
+                if AccountFunctions.is_card_matched(
+                    curr_card,
+                    given_card_no,
+                    given_card_name,
+                    given_card_expiry,
+                    given_card_cvv,
+                ):
+                    user_email = email
+                    break
         if user_email:
             user = Account.get_account_by_email(user_email)
             if user.balance.get_balance() < 5000:
                 print(prompts.INSUFFICIENT_BALANCE)
             else:
+                print(prompts.CONFIRM_TRANSFER)
                 pin = UserInputHandler.get_valid_pin("Enter your PIN Code: ")
                 if Account.validate_pin(user.email, pin):
                     if user.balance.withdraw(5000):
-                        print(
-                            prompts.CURRENT_BALANCE.format(user.balance.get_balance())
-                        )
                         print(prompts.BILL_PAID)
                 else:
                     print(prompts.WRONG_PIN)
         else:
-            print("Card details InValid")
+            print(prompts.IN_CARD_DETAILS)
+
+    @staticmethod
+    def is_card_matched(
+        card, given_card_no, given_card_name, given_card_expiry, given_card_cvv
+    ):
+        """matches user entered card details with actual details"""
+        if (
+            card.card_number == given_card_no
+            and card.card_name == given_card_name
+            and card.card_expiry_date == given_card_expiry
+            and str(card.card_cvv) == given_card_cvv
+            and card.card_status == "Activated"
+        ):
+            return True
+        return False

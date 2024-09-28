@@ -63,3 +63,6 @@ NEW_CARD_LIMIT = f"\n{DASHES}ERROR:Your account has reached the maximum limit fo
 CARD_CREATED = f"\n{DASHES}NEW CARD CREATION SUCCESSFUL{DASHES}\n"
 INVALID_BILL_ID = f"\n{DASHES}ERROR:Invalid Bill ID.{DASHES}\n"
 BILL_PAID = f"\n{DASHES}BILL PAID{DASHES}\n"
+IN_CARD_DETAILS = (
+    f"\n{DASHES}ERROR:Bill Payment Failed. Please check your card information{DASHES}\n"
+)
