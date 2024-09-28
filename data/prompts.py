@@ -59,3 +59,5 @@ INVALID_PIN = f"\n{DASHES}ERROR:Invalid PIN. Please enter a 4-digit number.{DASH
 WRONG_PIN = f"\n{DASHES}ERROR:PIN CODE validation failed. Please try again.{DASHES}\n"
 VALIDATION_SUCCESS = f"\n{DASHES}PIN VALIDATED{DASHES}\n"
 MANAGE_CARDS = f"\n{DASHES}MANAGE YOUR ACCOUNT CARDS{DASHES}\n"
+NEW_CARD_LIMIT = f"\n{DASHES}ERROR:Your account has reached the maximum limit for new cards. Please contact support.{DASHES}\n"
+CARD_CREATED = f"\n{DASHES}NEW CARD CREATION SUCCESSFUL{DASHES}\n"

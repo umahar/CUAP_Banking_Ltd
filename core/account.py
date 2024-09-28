@@ -196,7 +196,7 @@ class Account:
                 print(lines.index(line)+1,":",line, end='')
                 dp = line.split()
                 acc_num = dp[0]
-                # name = f"{dp[1]} {dp[2]}"
+                card_name = f"{dp[1]} {dp[2]}"
                 card_type = dp[3]
                 card_num = f"{dp[4]} {dp[5]} {dp[6]} {dp[7]}"
                 card_issue_date = dp[8]
@@ -206,7 +206,7 @@ class Account:
                 card_status = dp[12]
                 #create a new card for user
                 user = Account.get_account_by_acc_num(int(acc_num))
-                card = AccountCard(user,card_type,card_num,card_issue_date,card_expiry_date,card_cvv,card_limit,card_status)
+                card = AccountCard(user,card_name,card_type,card_num,card_issue_date,card_expiry_date,card_cvv,card_limit,card_status)
                 user.cards.append(card)
     @staticmethod
     def update_new_value(user='null',item_to_edit='balance',updated_value='null'):
@@ -260,8 +260,11 @@ class Account:
             )
             print(prompts.UPDATE_SUCCESSFUL)
 
-    def add_card(self):
+    def add_card(self,name=None):
         '''func to add a new card'''
         card_holder = self
-        card = AccountCard(card_holder)
+        if name is not None:
+            card = AccountCard(card_holder,name)
+        else:
+            card = AccountCard(card_holder)
         self.cards.append(card)

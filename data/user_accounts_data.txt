@@ -1,4 +1,4 @@
-umairabdullah@gmail.com Umair Abdullah Male umairabdullah@gmail.com 03225097962 Umair4200@ 5000 Current 2024-09-21 1999-11-08 Pakistan Rawalpindi 2477.0 100001 0000
+umairabdullah@gmail.com Umair Abdullah Male umairabdullah@gmail.com 03225097962 Umair4200@ 5000 Current 2024-09-21 1999-11-08 Pakistan Rawalpindi 2877.0 100001 0000
 ahmedbukhsh@gmail.com Ahmed Bukhsh Male ahmedbukhsh@gmail.com 03005113021 Ahmed4200@ 8000 Current 2024-09-21 1965-12-12 Pakistan Islamabad 846.0 100002 0000
 sobiaahmed@gmail.com Sobia Ahmed Female sobiaahmed@gmail.com 03447499500 Sobia4200@ 851 Saving 2024-09-21 1972-02-09 Pakistan Rawalpindi 11800.0 100003 0000
 haris@gmail.com Muhammad Haris Male haris@gmail.com 03145358322 Haris4200@ 97432 Current 2024-09-21 2010-05-16 Pakistan Rawalpindi 8636.0 100004 0000
@@ -8,3 +8,4 @@ contact@daxno.com Daxno Technologies Other contact@daxno.com 03185358322 Daxno@5
 testpin@gmail.com Umair Abdullah Male testpin@gmail.com 0322507952 Umair4200@ 8500 Current 2024-09-26 2018-10-22 TH HS 8255.0 499403 4200
 hahah@gmail.com Test Card Male hahah@gmail.com 030021150673 Umair4200@ 8000000 Current 2024-09-28 2018-10-15 US SS 8000000.0 290071 5000
 jjj@a.com Umair Resrt Male jjj@a.com 03225097962 Umair400@ 8000 Current 2024-09-28 2018-10-15 JH ss 8000.0 737020 5621
+zoro@zaira.com Zaira Awais Female zoro@zaira.com 03005113021 Zaira123@ 98440 Saving 2024-09-28 2018-10-15 US KL 98000.0 833664 1234

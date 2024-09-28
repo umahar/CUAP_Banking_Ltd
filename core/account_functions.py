@@ -1,7 +1,6 @@
 """this class manages auxillary functions to do tasks"""
 
 from core.account import Account
-from core.account_card import AccountCard
 from core.account_number import AccountNumber
 from data import prompts
 from utils.input_handler import UserInputHandler
@@ -92,17 +91,36 @@ class AccountFunctions:
         """the function handles the user function of my_cards"""
         print(prompts.MANAGE_CARDS)
         heading = f"Total Cards: {len(user.cards)}"
-        cards_menu = []
+        cards_menu = ["Order a New Card"]
         for card in user.cards:
             data = f"{card.card_name} {card.card_type} {card.card_number} {card.card_issue_date} {card.card_expiry_date} {card.card_cvv} {card.card_limit} {card.card_status}"
             cards_menu.append(data)
         opt = AccountFunctions.get_user_option(heading, cards_menu)
         if opt == 0:
             print(prompts.EXIT)
-        else:
-            index = opt - 1
+        if opt == 1:
+            if len(user.cards) == 3:
+                print(prompts.NEW_CARD_LIMIT)
+            else:
+                heading = f"\nDo you wish to get {user.first_name.title()} {user.last_name.title()} as your full name on the card?"
+                opt = AccountFunctions.get_user_option(heading, ["Yes", "No"])
+                if opt == 1:
+                    user.add_card()
+                if opt == 2:
+                    f_name = UserInputHandler.get_valid_first_name(
+                        "Enter your First Name: "
+                    )
+                    l_name = UserInputHandler.get_valid_first_name(
+                        "Enter your Last Name: "
+                    )
+                    full_name = f"{f_name} {l_name}"
+                    user.add_card(name=full_name)
+                    print(prompts.CARD_CREATED)
+        elif opt > 1:
+            index = opt - 2
             card = user.cards[index]
-            print(f"Selection: {cards_menu[index]}\n")
+            print(f"Selection: {cards_menu[opt-1]}")
+            print(f"Card Current Status: {card.card_status}\n")
             heading = "What would you like to do to this card?"
             options = [
                 "Activate Card",
@@ -114,10 +132,18 @@ class AccountFunctions:
             if opt == 0:
                 print(prompts.EXIT)
             if opt in (1, 2, 3):
-                index = opt - 1
-                new_status = options[index]
-                response = card.change_card_status(new_status)
-                print(f"{prompts.DASHES}{response}{prompts.DASHES}")
+                pin = UserInputHandler.get_valid_pin("Enter your PIN Code: ")
+                if Account.validate_pin(user.email, pin):
+                    index = opt - 1
+                    new_status = options[index]
+                    response = card.change_card_status(new_status)
+                    print(f"{prompts.DASHES}{response}{prompts.DASHES}")
+                else:
+                    print(prompts.WRONG_PIN)
+            if opt == 4:
+                print(f"\nCurrent Card Limit: {card.card_limit}")
+                print("Contact Support to change this limit")
+                # will finish later on
 
     @staticmethod
     def handle_transfer_money(user):
