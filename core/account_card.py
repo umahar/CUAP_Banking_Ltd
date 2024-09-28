@@ -49,7 +49,9 @@ class AccountCard:
         if card_type is None:
             self.save_data_to_file()
 
-    def save_data_to_file(self):
+    def save_data_to_file(self, remove=False):
+        if remove:
+            """need to copy current cards data and rewrite new one"""
         with open("data/user_cards_data.txt", encoding="UTF-8", mode="a") as file:
             data = f"{self.card_holder.account_number.get_account_number()} {self.card_name} \
 {self.card_type} {self.card_number} {self.card_issue_date} \
@@ -105,8 +107,37 @@ class AccountCard:
 
     def show_card_details(self):
         """displays card details"""
-        data = f"{self.card_holder.email} {self.card_holder.account_number.get_account_number()} {self.card_name} \
+        data = f"{self.card_name} \
 {self.card_type} {self.card_number} {self.card_issue_date} \
 {self.card_expiry_date} {self.card_cvv} {self.card_limit} \
 {self.card_status}"
         print(data)
+
+    def change_card_status(self, new_status):
+
+        if new_status == "Activate Card":
+
+            if self.card_status in ("Initiated", "Temporary Blocked"):
+                self.card_status = "Activated"
+                return f"Your Account Card ending with {self.card_number[-4:]} has been Activated."
+            if self.card_status == "Permanent Blocked":
+                return "This card is Permanently Blocked. It can not be Activated. Please contact support."
+            return "Your Account Card is already set to Active."
+
+        if new_status == "Temporary Block":
+
+            if self.card_status in ("Initiated", "Activated"):
+                self.card_status = "Temporary Blocked"
+                return f"Your Account Card ending with {self.card_number[-4:]} has been Temporary Blocked."
+            if self.card_status == "Permanent Blocked":
+                return "This card is Permanently Blocked. It can not be Temporarily Block. Please contact support."
+            return "Your Account Card is already set to Temporary Block."
+
+        if new_status == "Permanent Block":
+
+            if self.card_status in ("Initiated", "Activated", "Temporary Blocked"):
+                self.card_status = "Permanent Blocked"
+                return f"Your Account Card ending with {self.card_number[-4:]} has been set to Permanent Blocked."
+            return "Your Account Card is already set to Permanent Block."
+
+        self.save_data_to_file()

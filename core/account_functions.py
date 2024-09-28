@@ -90,8 +90,34 @@ class AccountFunctions:
     @staticmethod
     def handle_my_cards(user):
         """the function handles the user function of my_cards"""
+        print(prompts.MANAGE_CARDS)
+        heading = f"Total Cards: {len(user.cards)}"
+        cards_menu = []
         for card in user.cards:
-            card.show_card_details()
+            data = f"{card.card_name} {card.card_type} {card.card_number} {card.card_issue_date} {card.card_expiry_date} {card.card_cvv} {card.card_limit} {card.card_status}"
+            cards_menu.append(data)
+        opt = AccountFunctions.get_user_option(heading, cards_menu)
+        if opt == 0:
+            print(prompts.EXIT)
+        else:
+            index = opt - 1
+            card = user.cards[index]
+            print(f"Selection: {cards_menu[index]}\n")
+            heading = "What would you like to do to this card?"
+            options = [
+                "Activate Card",
+                "Temporary Block",
+                "Permanent Block",
+                "Change Limit",
+            ]
+            opt = AccountFunctions.get_user_option(heading, options)
+            if opt == 0:
+                print(prompts.EXIT)
+            if opt in (1, 2, 3):
+                index = opt - 1
+                new_status = options[index]
+                response = card.change_card_status(new_status)
+                print(f"{prompts.DASHES}{response}{prompts.DASHES}")
 
     @staticmethod
     def handle_transfer_money(user):
