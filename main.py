@@ -1,6 +1,5 @@
 """This is the main.py The program starts from this file"""
 
-from pydoc import doc
 from data import prompts
 from data.menu_options import main_menu_options
 from data.menu_options import login_menu_options

@@ -14,11 +14,22 @@ login_menu_options = [
     "Transfer Money",
     "Notifications",
     "Account Statement",
-    "Investments",
     "Log Out",
 ]
-# Debit/Credit Cards
-# cheques
-# Pay Bills using cards
-# Transaction Receipt
+
+
+# Account Statement
+#   -- transaction receipt by trans id
+#   -- bill payments using card
+#   -- deposit money
+#   -- withdraw money
+#   -- transfer money
+
+# Notifications
+#  -- login time/logout time
+#  -- debits/credits
+#  -- details edited
+#  -- pin changed
+#  -- card activation/removal
+
 # Admin Dashboard
