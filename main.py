@@ -98,7 +98,7 @@ def display_login_menu(user):
 
 def main():
     """Main function to start the program"""
-    Account.load_data()
+    AccountFunctions.load_data()
     display_main_menu()
 
 

@@ -28,7 +28,7 @@ class Account:
         city,
         pin,
         create_card=True
-    ): 
+    ):
         self.email = email
         self.phone_no = phone_no
         self.first_name = first_name
@@ -148,72 +148,6 @@ class Account:
         return False
 
     @staticmethod
-    def load_data():
-        """this functions is called on the start of program and it loads
-        all data saved in the file to a dict"""
-        print("\n------------------- USERS --------------------\n")
-        with open('data/bill_ids.txt',"r", encoding="UTF-8") as fp:
-            lines = fp.readlines()
-            for line in lines:
-                Account.bill_ids.append(line)
-        with open('data/user_accounts_data.txt',"r", encoding="UTF-8") as fp:
-            lines = fp.readlines()
-            for line in lines:
-                print(lines.index(line)+1,":",line, end='')
-                dp = line.split()
-                email = dp[0]
-                first_name = dp[1]
-                last_name = dp[2]
-                gender = dp[3]
-                email = dp[4]
-                phone_no = dp[5]
-                password = dp[6]
-                initial_deposit = dp[7]
-                account_type = dp[8]
-                date_created = dp[9]
-                date_of_birth = dp[10]
-                country = dp[11]
-                city = dp[12]
-                balance = dp[13]
-                acc_num = dp[14]
-                pin = dp[15]
-                new_account = Account(
-                    email,
-                    phone_no,
-                    first_name,
-                    last_name,
-                    gender,
-                    password,
-                    initial_deposit,
-                    account_type,
-                    date_of_birth,
-                    country,
-                    city,
-                    pin,
-                    create_card=False)
-                new_account.account_number.set_account_number(int(acc_num))
-                new_account.date_created = date_created
-                new_account.balance.set_balance(balance)
-        print("\n------------------- CARDS --------------------\n")
-        with open('data/user_cards_data.txt',"r", encoding="UTF-8") as fp:
-            lines = fp.readlines()
-            for line in lines:
-                print(lines.index(line)+1,":",line, end='')
-                dp = line.split()
-                acc_num = dp[0]
-                card_name = f"{dp[1]} {dp[2]}"
-                card_type = dp[3]
-                card_num = f"{dp[4]} {dp[5]} {dp[6]} {dp[7]}"
-                card_issue_date = dp[8]
-                card_expiry_date = dp[9]
-                card_cvv = dp[10]
-                card_limit = dp[11]
-                card_status = dp[12]
-                #create a new card for user
-                user = Account.get_account_by_acc_num(int(acc_num))
-                card = AccountCard(user,card_name,card_type,card_num,card_issue_date,card_expiry_date,card_cvv,card_limit,card_status)
-                user.cards.append(card)
-    @staticmethod
     def update_new_value(user='null',item_to_edit='balance',updated_value='null'):
         """this function takes the updated value and stores
         it in dict and and calls for file update"""
@@ -240,7 +174,8 @@ class Account:
                     f" {new_account.account_type}"
                     f" {new_account.date_created} {new_account.date_of_birth}"
                     f" {new_account.country} {new_account.city}"
-                    f" {new_account.balance.get_balance()} {new_account.account_number.get_account_number()}"
+                    f" {new_account.balance.get_balance()} \
+{new_account.account_number.get_account_number()}"
                     f" {new_account.pin}\n"
                     )
 
