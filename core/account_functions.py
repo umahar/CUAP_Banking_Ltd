@@ -3,6 +3,7 @@
 from core.account import Account
 from core.account_card import AccountCard
 from core.account_number import AccountNumber
+from core.transaction import Transaction
 from data import prompts
 from utils.input_handler import UserInputHandler
 
@@ -11,11 +12,15 @@ class AccountFunctions:
     """this class will handle all functions that a logged in user can perform"""
 
     @staticmethod
-    def get_user_option(heading, options):
+    def get_user_option(heading, options, header=False):
         """Display the main menu and get the user's option."""
         while True:
-            print(heading)
-            print(prompts.MENU_TEXT)
+            if header:
+                print(prompts.MENU_TEXT)
+                print(heading)
+            else:
+                print(heading)
+                print(prompts.MENU_TEXT)
             for index, item in enumerate(options):
                 print(f"{index + 1}. {item}")
             opt = input("\nOption #: ")
@@ -56,6 +61,18 @@ class AccountFunctions:
         pin = UserInputHandler.get_valid_pin("Enter your PIN Code: ")
         if Account.validate_pin(user.email, pin):
             user.balance.deposit(amount)
+            new_trans = Transaction(
+                trans_type="Credit",
+                funding_account_title=f"{user.first_name.title()} {user.last_name.title()}",
+                funding_account_number=f"{user.account_number.get_account_number()}",
+                receiver_details=[
+                    f"{user.first_name.title()} {user.last_name.title()}",
+                    f"{user.account_number.get_account_number()}",
+                ],
+                trans_amount=f"{amount}",
+                balance=f"{user.balance.get_balance()}",
+            )
+            user.transactions.append(new_trans)
             print(prompts.CURRENT_BALANCE.format(user.balance.get_balance()))
             print(prompts.DEPOSIT_SUCCESSFUL)
         else:
@@ -72,6 +89,18 @@ class AccountFunctions:
         if Account.validate_pin(user.email, pin):
             if user.balance.withdraw(amount):
                 print(prompts.CURRENT_BALANCE.format(user.balance.get_balance()))
+                new_trans = Transaction(
+                    trans_type="Debit",
+                    funding_account_title=f"{user.first_name.title()} {user.last_name.title()}",
+                    funding_account_number=f"{user.account_number.get_account_number()}",
+                    receiver_details=[
+                        f"{user.first_name.title()} {user.last_name.title()}",
+                        f"{user.account_number.get_account_number()}",
+                    ],
+                    trans_amount=f"{amount}",
+                    balance=f"{user.balance.get_balance()}",
+                )
+                user.transactions.append(new_trans)
                 print(prompts.WITHDRAW_SUCCESSFUL)
             else:
                 print(prompts.INSUFFICIENT_BALANCE)
@@ -181,7 +210,33 @@ class AccountFunctions:
                         if Account.validate_pin(user.email, pin):
                             print(prompts.CONFIRM_TRANSFER)
                             sender.balance.withdraw(amount_to_send)
+                            ##add trans to sender
+                            s_new_trans = Transaction(
+                                trans_type="Debit",
+                                funding_account_title=f"{sender.first_name.title()} {sender.last_name.title()}",
+                                funding_account_number=f"{sender.account_number.get_account_number()}",
+                                receiver_details=[
+                                    f"{receiver.first_name.title()} {receiver.last_name.title()}",
+                                    f"{receiver.account_number.get_account_number()}",
+                                ],
+                                trans_amount=f"{amount_to_send}",
+                                balance=f"{sender.balance.get_balance()}",
+                            )
+                            sender.transactions.append(s_new_trans)
                             receiver.balance.deposit(amount_to_send)
+                            ##add trans to receiver
+                            r_new_trans = Transaction(
+                                trans_type="Credit",
+                                funding_account_title=f"{sender.first_name.title()} {sender.last_name.title()}",
+                                funding_account_number=f"{sender.account_number.get_account_number()}",
+                                receiver_details=[
+                                    f"{receiver.first_name.title()} {receiver.last_name.title()}",
+                                    f"{receiver.account_number.get_account_number()}",
+                                ],
+                                trans_amount=f"{amount_to_send}",
+                                balance=f"{receiver.balance.get_balance()}",
+                            )
+                            receiver.transactions.append(r_new_trans)
                             print(prompts.TRANSFER_COMPLETE)
                             print(
                                 prompts.CURRENT_BALANCE.format(
@@ -204,6 +259,21 @@ class AccountFunctions:
     @staticmethod
     def handle_account_statement(user):
         """the function handles the user function of account_statement"""
+        if user.transactions:
+            print(prompts.VIEW_TRANSACTIONS)
+            print("Total Transactions: ", len(user.transactions))
+            print(prompts.SELECT_TRANSACTION)
+            options = []
+            for transaction in user.transactions:
+                data = f"   {transaction.trans_id}   {transaction.date}   {transaction.trans_type}   {transaction.trans_amount}   {transaction.balance}"
+                options.append(data)
+            trans_num = AccountFunctions.get_user_option(
+                prompts.TRANSACTION_HEADING, options, header=True
+            )
+            transaction = user.transactions[trans_num - 1]
+            transaction.display_transaction(str(transaction.trans_id))
+        else:
+            print(prompts.NO_TRANSACTIONS)
 
     @staticmethod
     def handle_account_investments(user):
@@ -287,6 +357,15 @@ class AccountFunctions:
                 if Account.validate_pin(user.email, pin):
                     if user.balance.withdraw(5000):
                         print(prompts.BILL_PAID)
+                        new_trans = Transaction(
+                            trans_type="Debit",
+                            funding_account_title=f"{user.first_name.title()} {user.last_name.title()}",
+                            funding_account_number=f"{user.account_number.get_account_number()}",
+                            receiver_details=["Gas SupplyCo", "1245678"],
+                            trans_amount="5000",
+                            balance=f"{user.balance.get_balance()}",
+                        )
+                        user.transactions.append(new_trans)
                 else:
                     print(prompts.WRONG_PIN)
         else:
@@ -355,11 +434,11 @@ class AccountFunctions:
                 new_account.account_number.set_account_number(int(acc_num))
                 new_account.date_created = date_created
                 new_account.balance.set_balance(balance)
-        print("\n------------------- CARDS --------------------\n")
+        # print("\n------------------- CARDS --------------------\n")
         with open("data/user_cards_data.txt", "r", encoding="UTF-8") as fp:
             lines = fp.readlines()
             for line in lines:
-                print(lines.index(line) + 1, ":", line, end="")
+                # print(lines.index(line) + 1, ":", line, end="")
                 dp = line.split()
                 acc_num = dp[0]
                 card_name = f"{dp[1]} {dp[2]}"
@@ -384,3 +463,34 @@ class AccountFunctions:
                     card_status,
                 )
                 user.cards.append(card)
+        print("\n------------------- TRANSACTIONS --------------------\n")
+        with open("data/transactions.txt", "r", encoding="UTF-8") as fp:
+            lines = fp.readlines()
+            for line in lines:
+                print(lines.index(line) + 1, ":", line, end="")
+                dp = line.split()
+                t_id = dp[0]
+                t_date = dp[1]
+                t_time = dp[2]
+                t_type = dp[3]
+                t_funding_title = f"{dp[4]} {dp[5]}"
+                t_acc_num = dp[6]
+                t_beneficiary_name = f"{dp[7]} {dp[8]}"
+                t_beneficiary_acc_num = dp[9]
+                receiver_details = [t_beneficiary_name, t_beneficiary_acc_num]
+                t_amount = dp[10]
+                t_balance = dp[11]
+                # get user based on acc
+                user = Account.get_account_by_acc_num(int(t_acc_num))
+                old_transaction = Transaction(
+                    t_type,
+                    t_funding_title,
+                    t_acc_num,
+                    receiver_details,
+                    t_amount,
+                    t_balance,
+                    trans_id=t_id,
+                    date=t_date,
+                    time=t_time,
+                )
+                user.transactions.append(old_transaction)

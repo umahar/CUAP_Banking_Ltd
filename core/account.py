@@ -45,6 +45,7 @@ class Account:
         self.balance = Balance(initial_deposit)
         self.account_number = AccountNumber()
         self.cards = []
+        self.transactions = []
         if create_card:
             self.add_card()
         Account.accounts_data[self.email]=self
@@ -208,3 +209,5 @@ class Account:
         else:
             card = AccountCard(card_holder)
         self.cards.append(card)
+
+    
