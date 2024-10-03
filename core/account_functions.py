@@ -481,7 +481,10 @@ class AccountFunctions:
                 t_amount = dp[10]
                 t_balance = dp[11]
                 # get user based on acc
-                user = Account.get_account_by_acc_num(int(t_acc_num))
+                if t_type == "Credit":
+                    user = Account.get_account_by_acc_num(int(t_beneficiary_acc_num))
+                elif t_type == "Debit":
+                    user = Account.get_account_by_acc_num(int(t_acc_num))
                 old_transaction = Transaction(
                     t_type,
                     t_funding_title,

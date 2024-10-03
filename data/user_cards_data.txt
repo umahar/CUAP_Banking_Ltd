@@ -1,14 +1,8 @@
 100001 Umair Abdullah Mastercard 9714 2790 6722 4059 09/24 09/27 198 100000 Initiated
 100002 Ahmed Bukhsh Mastercard 5816 9492 8796 7329 09/24 09/27 896 100000 Permanent-Blocked
-100002 Ahmed Bukhsh Mastercard 5812 9392 8396 7249 09/24 09/27 893 100000 Initiated
+100002 Ahmed Bukhsh Mastercard 5812 9392 8396 7249 09/24 09/27 893 100000 Activated
 100003 Sobia Ahmed Mastercard 3309 9450 5297 1734 09/24 09/27 253 100000 Initiated
 100004 Muhammad Haris UnionPay 4276 4734 3727 6694 09/24 09/27 781 100000 Initiated
 100005 Kainat Ahmed Mastercard 6894 7876 5939 9026 09/24 09/27 236 100000 Initiated
 100006 Irtaza Ali AmericanExpress 3325 1117 4753 5466 09/24 09/27 161 100000 Initiated
 100007 Daxno Technologies Visa 5750 9350 1311 8018 09/24 09/27 485 100000 Initiated
-499403 Umair Abdullah Mastercard 5728 4367 5226 6528 09/24 09/27 823 100000 Initiated
-290071 Test Card AmericanExpress 4715 7267 6603 9504 09/24 09/27 872 100000 Initiated
-737020 Umair Resrt Mastercard 7132 1200 1696 7475 09/24 09/27 323 100000 Initiated
-833664 Zaira Awais UnionPay 4154 1059 9908 3898 09/24 09/27 889 100000 Activated
-833664 Zairoo Baby UnionPay 2514 3874 6826 1618 09/24 09/27 449 100000 Temporary-Blocked
-833664 Baby Zariaaa AmericanExpress 3604 8005 2732 8352 09/24 09/27 170 100000 Permanent-Blocked

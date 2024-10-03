@@ -24,6 +24,7 @@ login_menu_options = [
 #   -- deposit money
 #   -- withdraw money
 #   -- transfer money
+# --reverse transa
 
 # Notifications
 #  -- login time/logout time
