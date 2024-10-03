@@ -73,6 +73,8 @@ UNKNOWN_TRANSACTION_ID = (
 TRANSACTION_DETAILS = f"\n{DASHES}TRANSACTION DETAILS{DASHES}\n"
 SHOW_TRANS_DETAIL = "Transaction ID: {}\nDate: {}\nTime: {}\nType of Transaction: {}\n\nFunding Account Title: {}\nFunding Account Number: {}\nBeneficiary Name: {}\nBeneficiary Account Number: {}\n\nTransaction Amount: {}\nBalance: {}\n"
 VIEW_TRANSACTIONS = f"\n{DASHES}VIEW YOUR ACCOUNT TRANSACTIONS{DASHES}\n"
-TRANSACTION_HEADING = "\nNo.       Transaction ID   \tDate      Type    Amount  Balance"
+TRANSACTION_HEADING = (
+    "\nNo.       Transaction ID   \t Date      Type    Amount    Balance"
+)
 SELECT_TRANSACTION = "\nSelect a Transaction to view its details:"
 NO_TRANSACTIONS = f"\n{DASHES}ERROR:Account has no transactions yet.{DASHES}\n"

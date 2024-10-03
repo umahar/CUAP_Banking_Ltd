@@ -263,15 +263,30 @@ class AccountFunctions:
             print(prompts.VIEW_TRANSACTIONS)
             print("Total Transactions: ", len(user.transactions))
             print(prompts.SELECT_TRANSACTION)
+
+            # Reverse the transactions for display
+            reversed_transactions = user.transactions[::-1]
             options = []
-            for transaction in user.transactions:
-                data = f"   {transaction.trans_id}   {transaction.date}   {transaction.trans_type}   {transaction.trans_amount}   {transaction.balance}"
+
+            # Display transactions in reverse order
+            for transaction in reversed_transactions:
+                data = f"   {transaction.trans_id}   {transaction.date}   {transaction.trans_type}    {transaction.trans_amount}    {transaction.balance}"
                 options.append(data)
+
+            # Get the user's option based on the reversed list
             trans_num = AccountFunctions.get_user_option(
                 prompts.TRANSACTION_HEADING, options, header=True
             )
-            transaction = user.transactions[trans_num - 1]
-            transaction.display_transaction(str(transaction.trans_id))
+            if trans_num == 0:
+                print(prompts.EXIT)
+            else:
+                # Adjust the index to match the original list
+                # If there are N transactions and user selects trans_num from the reversed list,
+                # the corresponding index in the original list is: len(user.transactions) - trans_num
+                original_index = len(user.transactions) - trans_num
+                transaction = user.transactions[original_index]
+
+                transaction.display_transaction(str(transaction.trans_id))
         else:
             print(prompts.NO_TRANSACTIONS)
 
@@ -463,11 +478,11 @@ class AccountFunctions:
                     card_status,
                 )
                 user.cards.append(card)
-        print("\n------------------- TRANSACTIONS --------------------\n")
+        # print("\n------------------- TRANSACTIONS --------------------\n")
         with open("data/transactions.txt", "r", encoding="UTF-8") as fp:
             lines = fp.readlines()
             for line in lines:
-                print(lines.index(line) + 1, ":", line, end="")
+                # print(lines.index(line) + 1, ":", line, end="")
                 dp = line.split()
                 t_id = dp[0]
                 t_date = dp[1]

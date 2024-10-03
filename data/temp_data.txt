@@ -1008,3 +1008,51 @@ contact@daxno.com Daxno Technologies Other contact@daxno.com 03185358322 Daxno@5
 100005 Kainat Ahmed Mastercard 6894 7876 5939 9026 09/24 09/27 236 100000 Initiated
 100006 Irtaza Ali AmericanExpress 3325 1117 4753 5466 09/24 09/27 161 100000 Initiated
 100007 Daxno Technologies Visa 5750 9350 1311 8018 09/24 09/27 485 100000 Initiated
+umairabdullah@gmail.com Umair Abdullah Male umairabdullah@gmail.com 03225097962 Umair4200@ 5000 Current 2024-09-21 1999-11-08 Pakistan Rawalpindi 2877.0 100001 0000
+ahmedbukhsh@gmail.com Ahmed Bukhsh Male ahmedbukhsh@gmail.com 03005113021 Ahmed4200@ 8000 Current 2024-09-21 1965-12-12 Pakistan Islamabad 28108.0 100002 0000
+sobiaahmed@gmail.com Sobia Ahmed Female sobiaahmed@gmail.com 03447499500 Sobia4200@ 851 Saving 2024-09-21 1972-02-09 Pakistan Rawalpindi 19000.0 100003 0000
+haris@gmail.com Muhammad Haris Male haris@gmail.com 03145358322 Haris4200@ 97432 Current 2024-09-21 2010-05-16 Pakistan Rawalpindi 8636.0 100004 0000
+kainatahmed@gmail.com Kainat Ahmed Female kainatahmed@gmail.com 03355113021 Kainat4200@ 9865 Saving 2024-09-21 1997-04-27 Pakistan Bhalwal 7372.0 100005 0000
+irtazaali@gmail.com Irtaza Ali Male irtazaali@gmail.com 0312123456789 Irtaza123@ 80400 Saving 2024-09-22 2000-05-29 Pakistan Rawalpindi 1085.0 100006 0000
+contact@daxno.com Daxno Technologies Other contact@daxno.com 03185358322 Daxno@5345 5000 Current 2024-09-24 2021-06-15 PK ISB 63000.0 100007 5621
+
+100001 Umair Abdullah Mastercard 9714 2790 6722 4059 09/24 09/27 198 100000 Initiated
+100002 Ahmed Bukhsh Mastercard 5816 9492 8796 7329 09/24 09/27 896 100000 Permanent-Blocked
+100002 Ahmed Bukhsh Mastercard 5812 9392 8396 7249 09/24 09/27 893 100000 Activated
+100003 Sobia Ahmed Mastercard 3309 9450 5297 1734 09/24 09/27 253 100000 Initiated
+100004 Muhammad Haris UnionPay 4276 4734 3727 6694 09/24 09/27 781 100000 Initiated
+100005 Kainat Ahmed Mastercard 6894 7876 5939 9026 09/24 09/27 236 100000 Initiated
+100006 Irtaza Ali AmericanExpress 3325 1117 4753 5466 09/24 09/27 161 100000 Initiated
+100007 Daxno Technologies Visa 5750 9350 1311 8018 09/24 09/27 485 100000 Initiated
+umairabdullah@gmail.com Umair Abdullah Male umairabdullah@gmail.com 03225097962 Umair4200@ 5000 Current 2024-09-21 1999-11-08 Pakistan Rawalpindi 2877.0 100001 0000
+ahmedbukhsh@gmail.com Ahmed Bukhsh Male ahmedbukhsh@gmail.com 03005113021 Ahmed4200@ 8000 Current 2024-09-21 1965-12-12 Pakistan Islamabad 28108.0 100002 0000
+sobiaahmed@gmail.com Sobia Ahmed Female sobiaahmed@gmail.com 03447499500 Sobia4200@ 851 Saving 2024-09-21 1972-02-09 Pakistan Rawalpindi 19000.0 100003 0000
+haris@gmail.com Muhammad Haris Male haris@gmail.com 03145358322 Haris4200@ 97432 Current 2024-09-21 2010-05-16 Pakistan Rawalpindi 8636.0 100004 0000
+kainatahmed@gmail.com Kainat Ahmed Female kainatahmed@gmail.com 03355113021 Kainat4200@ 9865 Saving 2024-09-21 1997-04-27 Pakistan Bhalwal 7372.0 100005 0000
+irtazaali@gmail.com Irtaza Ali Male irtazaali@gmail.com 0312123456789 Irtaza123@ 80400 Saving 2024-09-22 2000-05-29 Pakistan Rawalpindi 1085.0 100006 0000
+contact@daxno.com Daxno Technologies Other contact@daxno.com 03185358322 Daxno@5345 5000 Current 2024-09-24 2021-06-15 PK ISB 85222.0 100007 5621
+
+100001 Umair Abdullah Mastercard 9714 2790 6722 4059 09/24 09/27 198 100000 Initiated
+100002 Ahmed Bukhsh Mastercard 5816 9492 8796 7329 09/24 09/27 896 100000 Permanent-Blocked
+100002 Ahmed Bukhsh Mastercard 5812 9392 8396 7249 09/24 09/27 893 100000 Activated
+100003 Sobia Ahmed Mastercard 3309 9450 5297 1734 09/24 09/27 253 100000 Initiated
+100004 Muhammad Haris UnionPay 4276 4734 3727 6694 09/24 09/27 781 100000 Initiated
+100005 Kainat Ahmed Mastercard 6894 7876 5939 9026 09/24 09/27 236 100000 Initiated
+100006 Irtaza Ali AmericanExpress 3325 1117 4753 5466 09/24 09/27 161 100000 Initiated
+100007 Daxno Technologies Visa 5750 9350 1311 8018 09/24 09/27 485 100000 Initiated
+umairabdullah@gmail.com Umair Abdullah Male umairabdullah@gmail.com 03225097962 Umair4200@ 5000 Current 2024-09-21 1999-11-08 Pakistan Rawalpindi 2877.0 100001 0000
+ahmedbukhsh@gmail.com Ahmed Bukhsh Male ahmedbukhsh@gmail.com 03005113021 Ahmed4200@ 8000 Current 2024-09-21 1965-12-12 Pakistan Islamabad 28108.0 100002 0000
+sobiaahmed@gmail.com Sobia Ahmed Female sobiaahmed@gmail.com 03447499500 Sobia4200@ 851 Saving 2024-09-21 1972-02-09 Pakistan Rawalpindi 19000.0 100003 0000
+haris@gmail.com Muhammad Haris Male haris@gmail.com 03145358322 Haris4200@ 97432 Current 2024-09-21 2010-05-16 Pakistan Rawalpindi 8636.0 100004 0000
+kainatahmed@gmail.com Kainat Ahmed Female kainatahmed@gmail.com 03355113021 Kainat4200@ 9865 Saving 2024-09-21 1997-04-27 Pakistan Bhalwal 7372.0 100005 0000
+irtazaali@gmail.com Irtaza Ali Male irtazaali@gmail.com 0312123456789 Irtaza123@ 80400 Saving 2024-09-22 2000-05-29 Pakistan Rawalpindi 1085.0 100006 0000
+contact@daxno.com Daxno Technologies Other contact@daxno.com 03185358322 Daxno@5345 5000 Current 2024-09-24 2021-06-15 PK ISB 85000.0 100007 5621
+
+100001 Umair Abdullah Mastercard 9714 2790 6722 4059 09/24 09/27 198 100000 Initiated
+100002 Ahmed Bukhsh Mastercard 5816 9492 8796 7329 09/24 09/27 896 100000 Permanent-Blocked
+100002 Ahmed Bukhsh Mastercard 5812 9392 8396 7249 09/24 09/27 893 100000 Activated
+100003 Sobia Ahmed Mastercard 3309 9450 5297 1734 09/24 09/27 253 100000 Initiated
+100004 Muhammad Haris UnionPay 4276 4734 3727 6694 09/24 09/27 781 100000 Initiated
+100005 Kainat Ahmed Mastercard 6894 7876 5939 9026 09/24 09/27 236 100000 Initiated
+100006 Irtaza Ali AmericanExpress 3325 1117 4753 5466 09/24 09/27 161 100000 Initiated
+100007 Daxno Technologies Visa 5750 9350 1311 8018 09/24 09/27 485 100000 Initiated

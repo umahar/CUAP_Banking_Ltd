@@ -19,11 +19,6 @@ login_menu_options = [
 
 
 # Account Statement
-#   -- transaction receipt by trans id
-#   -- bill payments using card
-#   -- deposit money
-#   -- withdraw money
-#   -- transfer money
 # --reverse transa
 
 # Notifications
