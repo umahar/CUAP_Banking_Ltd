@@ -115,7 +115,7 @@ class Notification:
         with open("data/notifications.txt", "w", encoding="UTF-8") as file:
             if updated_lines:
                 for line in updated_lines:
-                    file.write(line + "\n")
+                    file.write(line if line.endswith("\n") else line + "\n")
             else:
                 for n_id in Notification.notifications:
                     self = Notification.get_notification_by_id(n_id)
