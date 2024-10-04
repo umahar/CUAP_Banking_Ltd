@@ -3,6 +3,7 @@
 from core.account import Account
 from core.account_card import AccountCard
 from core.account_number import AccountNumber
+from core.notification import Notification
 from core.transaction import Transaction
 from data import prompts
 from utils.input_handler import UserInputHandler
@@ -255,6 +256,41 @@ class AccountFunctions:
     @staticmethod
     def handle_notifications(user):
         """the function handles the user function of notifications"""
+        if user.notifications:
+            print(prompts.VIEW_NOTIFICATIONS)
+            print("Total Notifications: ", len(user.notifications))
+            unread_notifications = []
+            for notification in user.notifications:
+                if notification.status == "Unread":
+                    unread_notifications.append(notification)
+            print("Unread Notifications: ", len(unread_notifications))
+            menu = [
+                "View All Notifications",
+                "View Unread Notifications",
+                "Delete All Notifications",
+            ]
+            opt = AccountFunctions.get_user_option(
+                "\nHere are your options to manage notifications", menu
+            )
+            if opt == 0:
+                print(prompts.EXIT)
+            elif opt == 1:
+                print(prompts.NOTIFICATION_DETAILS)
+                reversed_notifications = user.notifications[::-1]
+                for index, notification in enumerate(reversed_notifications):
+                    print(f"{index + 1}. {notification.display_notification()}")
+                    notification.mark_as_read()
+            elif opt == 2:
+                print(prompts.NOTIFICATION_DETAILS)
+                reversed_notifications = unread_notifications[::-1]
+                for index, notification in enumerate(reversed_notifications):
+                    print(f"{index + 1}. {notification.display_notification()}")
+                    notification.mark_as_read()
+            elif opt == 3:
+                AccountFunctions.delete_user_notifications(user)
+                print(prompts.NOTIFICATIONS_DELETED)
+        else:
+            print(prompts.NO_NOTIFICATIONS)
 
     @staticmethod
     def handle_account_statement(user):
@@ -512,3 +548,53 @@ class AccountFunctions:
                     time=t_time,
                 )
                 user.transactions.append(old_transaction)
+        print("\n------------------- NOTIFICATIONS --------------------\n")
+        with open("data/notifications.txt", "r", encoding="UTF-8") as fp:
+            lines = fp.readlines()
+            for line in lines:
+                print(lines.index(line) + 1, ":", line, end="")
+                dp = line.split()
+                acc_name = f"{dp[0]} {dp[1]}"
+                acc_num = dp[2]
+                date = dp[3]
+                notification_id = dp[4]
+                time = dp[5]
+                notification_type = dp[6]
+                card_num = dp[7]
+                bill_id = dp[8]
+                card_new_status = dp[9]
+                amount = dp[10]
+                transaction_id = dp[11]
+                status = dp[12]
+
+                old_notification = Notification(
+                    notification_type=notification_type,
+                    acc_num=acc_num,
+                    acc_name=acc_name,
+                    card_num=card_num,
+                    bill_id=bill_id,
+                    card_new_status=card_new_status,
+                    amount=amount,
+                    notification_id=notification_id,
+                    date=date,
+                    time=time,
+                    transaction_id=transaction_id,
+                    status=status,
+                )
+                user = Account.get_account_by_acc_num(int(acc_num))
+                user.notifications.append(old_notification)
+
+    @staticmethod
+    def delete_user_notifications(user):
+        """deleted the notifications of current user"""
+        user_acc_num = str(user.account_number.get_account_number())
+        with open("data/notifications.txt", "r", encoding="UTF-8") as fp:
+            lines = fp.readlines()
+            updated_lines = []
+            for line in lines:
+                dp = line.split()
+                acc_num = dp[2]
+                if acc_num == user_acc_num:
+                    continue
+                updated_lines.append(line)
+            Notification.update_notification_on_file(updated_lines)

@@ -30,9 +30,7 @@ class Transaction:
             date if date is not None else datetime.datetime.now().strftime("%d-%m-%y")
         )
         self.time = (
-            time
-            if time is not None
-            else datetime.datetime.now().strftime("%Ss-%Mm-%Hh")
+            time if time is not None else datetime.datetime.now().strftime("%I:%M-%p")
         )
         self.trans_type = trans_type
         self.funding_account_title = funding_account_title

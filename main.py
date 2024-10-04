@@ -5,6 +5,7 @@ from data.menu_options import main_menu_options
 from data.menu_options import login_menu_options
 from core.account import Account
 from core.account_functions import AccountFunctions
+from core.notification import Notification
 from utils.input_handler import UserInputHandler
 
 
@@ -21,6 +22,12 @@ def handle_login():
     user = Account.login_user(email, password)
     if user:
         print(prompts.LOGIN_SUCCESS)
+        new_notification = Notification(
+            notification_type="Logged_In",
+            acc_num=f"{user.account_number.get_account_number()}",
+            acc_name=f"{user.first_name.title()} {user.last_name.title()}",
+        )
+        user.notifications.append(new_notification)
         display_login_menu(user)
     else:
         print(prompts.LOGIN_FAILED)

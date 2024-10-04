@@ -46,6 +46,7 @@ class Account:
         self.account_number = AccountNumber()
         self.cards = []
         self.transactions = []
+        self.notifications = []
         if create_card:
             self.add_card()
         Account.accounts_data[self.email]=self

@@ -16,11 +16,20 @@ login_menu_options = [
     "Account Statement",
     "Log Out",
 ]
-
-
-# Account Statement
-# --reverse transa
-
+notifications_type = [
+    "Logged In",
+    "Registered",
+    "Bill Paid",
+    "Card Used",
+    "Details Edited",
+    "PIN Changed",
+    "Card Status Changed",
+    "Logged Out",
+    "Amount Debited",
+    "Amount Credited",
+    "Amount Withdrawn",
+    "Amount Deposited",
+]
 # Notifications
 #  -- login time/logout time
 #  -- debits/credits
