@@ -5,4 +5,4 @@
 100004 Muhammad Haris UnionPay 4276 4734 3727 6694 09/24 09/27 781 100000 Initiated
 100005 Kainat Ahmed Mastercard 6894 7876 5939 9026 09/24 09/27 236 100000 Initiated
 100006 Irtaza Ali AmericanExpress 3325 1117 4753 5466 09/24 09/27 161 100000 Initiated
-100007 Daxno Technologies Visa 5750 9350 1311 8018 09/24 09/27 485 100000 Initiated
+100007 Daxno Technologies Visa 5750 9350 1311 8018 09/24 09/27 485 100000 Activated

@@ -28,6 +28,11 @@ def handle_login():
             acc_name=f"{user.first_name.title()} {user.last_name.title()}",
         )
         user.notifications.append(new_notification)
+        unread_notifications = []
+        for notification in user.notifications:
+            if notification.status == "Unread":
+                unread_notifications.append(notification)
+        print(prompts.UNREAD_NOTIFICATIONS.format(len(unread_notifications)))
         display_login_menu(user)
     else:
         print(prompts.LOGIN_FAILED)
@@ -38,6 +43,12 @@ def handle_register():
     user = Account.register_user()
     if user:
         print(prompts.REGISTER_SUCCESS)
+        new_notification = Notification(
+            notification_type="Registered",
+            acc_num=f"{user.account_number.get_account_number()}",
+            acc_name=f"{user.first_name.title()} {user.last_name.title()}",
+        )
+        user.notifications.append(new_notification)
         display_login_menu(user)
     else:
         print(prompts.REGISTER_FAILED)
@@ -47,7 +58,7 @@ def handle_bill_payment():
     """function to allow user to pay bills without login"""
     bill_id = input("Enter your Bill ID: ")
     if bill_id in Account.bill_ids:
-        AccountFunctions.handle_bill_payment()
+        AccountFunctions.handle_bill_payment(bill_id)
     else:
         print(prompts.INVALID_BILL_ID)
 
@@ -95,6 +106,12 @@ def display_login_menu(user):
             11: AccountFunctions.handle_account_investments,
         }
         if opt in (0, 12):
+            new_notification = Notification(
+                notification_type="Logged_Out",
+                acc_num=f"{user.account_number.get_account_number()}",
+                acc_name=f"{user.first_name.title()} {user.last_name.title()}",
+            )
+            user.notifications.append(new_notification)
             break
         if opt in func_map:
             if func_map[opt](user):

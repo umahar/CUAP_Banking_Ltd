@@ -91,16 +91,16 @@ class Notification:
         notification_mapping = {
             "Logged_In": f"Your account {acc_num}, titled '{acc_name}', was Logged In at {time} on {date}.",
             "Registered": f"Your account {acc_num}, titled '{acc_name}', registered with CUAP at {time} on {date}.",
-            "Bill_Paid": f"Your account {acc_num}, titled '{acc_name}', was used to pay a bill with Bill ID as {self.bill_id}. Transaction ID is {self.transaction_id}.",
-            "Card_Used": f"Your account {acc_num}, titled '{acc_name}', was used for a card payment with your card ending with {self.card_num}. Transaction ID is {self.transaction_id}.",
-            "Details_Edited": f"You edited some of your Account Details for your account {acc_num}, titled '{acc_name}'.",
-            "PIN_Changed": f"You changed your PIN Code for your account {acc_num}, titled '{acc_name}'.",
-            "Card_Status_Changed": f"Your card status was changed to {self.card_new_status} for your account {acc_num}, titled '{acc_name}'.",
+            "Bill_Paid": f"Your account {acc_num}, titled '{acc_name}', was used to pay a bill at {time} on {date} with Bill ID as {self.bill_id}. Transaction ID is {self.transaction_id}.",
+            "Card_Used": f"Your account {acc_num}, titled '{acc_name}', was used for a card payment at {time} on {date} with your card ending with {self.card_num}. Transaction ID is {self.transaction_id}.",
+            "Details_Edited": f"You edited some of your Account Details for your account {acc_num}, titled '{acc_name}' at {time} on {date}.",
+            "PIN_Changed": f"You changed your PIN Code for your account {acc_num}, titled '{acc_name}' at {time} on {date}.",
+            "Card_Status_Changed": f"Your card status ending with '{self.card_num}' was changed to '{self.card_new_status}' for your account {acc_num}, titled '{acc_name}' at {time} on {date}.",
             "Logged_Out": f"Your account {acc_num}, titled '{acc_name}', was Logged Out at {time} on {date}.",
-            "Amount_Debited": f"Your account {acc_num}, titled '{acc_name}', was Debited with an amount of {self.amount}. Transaction ID is {self.transaction_id}.",
-            "Amount_Credited": f"Your account {acc_num}, titled '{acc_name}', was Credited with an amount of {self.amount}. Transaction ID is {self.transaction_id}.",
-            "Amount_Withdrawn": f"Your account {acc_num}, titled '{acc_name}', was Withdrawn with an amount of {self.amount}. Transaction ID is {self.transaction_id}.",
-            "Amount_Deposited": f"Your account {acc_num}, titled '{acc_name}', was Deposited with an amount of {self.amount}.Transaction ID is {self.transaction_id}.",
+            "Amount_Debited": f"Your account {acc_num}, titled '{acc_name}', was Debited with an amount of {self.amount} at {time} on {date}. Transaction ID is {self.transaction_id}.",
+            "Amount_Credited": f"Your account {acc_num}, titled '{acc_name}', was Credited with an amount of {self.amount} at {time} on {date}. Transaction ID is {self.transaction_id}.",
+            "Amount_Withdrawn": f"Your account {acc_num}, titled '{acc_name}', was Withdrawn with an amount of {self.amount} at {time} on {date}. Transaction ID is {self.transaction_id}.",
+            "Amount_Deposited": f"Your account {acc_num}, titled '{acc_name}', was Deposited with an amount of {self.amount} at {time} on {date}. Transaction ID is {self.transaction_id}.",
         }
         return notification_mapping.get(self.notification_type, "Invalid Notification")
 

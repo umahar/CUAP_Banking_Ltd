@@ -17,18 +17,18 @@ login_menu_options = [
     "Log Out",
 ]
 notifications_type = [
-    "Logged In",
+    "Logged_In",
     "Registered",
-    "Bill Paid",
-    "Card Used",
-    "Details Edited",
-    "PIN Changed",
-    "Card Status Changed",
-    "Logged Out",
-    "Amount Debited",
-    "Amount Credited",
-    "Amount Withdrawn",
-    "Amount Deposited",
+    "Bill_Paid",
+    "Card_Used",
+    "Details_Edited",
+    "PIN_Changed",
+    "Card_Status_Changed",
+    "Logged_Out",
+    "Amount_Debited",
+    "Amount_Credited",
+    "Amount_Withdrawn",
+    "Amount_Deposited",
 ]
 # Notifications
 #  -- login time/logout time

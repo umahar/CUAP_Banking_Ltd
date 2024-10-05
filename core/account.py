@@ -4,6 +4,7 @@ from datetime import datetime
 from core.account_balance import Balance
 from core.account_card import AccountCard
 from core.account_number import AccountNumber
+from core.notification import Notification
 from data import prompts
 from utils.input_handler import UserInputHandler
 
@@ -200,6 +201,12 @@ class Account:
                 f"{prompts.DASHES}Changing {item_to_edit.title().replace("_"," ")}:"
                 f" '{old_data}' to '{new_data}'{prompts.DASHES}"
             )
+            new_notification = Notification(
+            notification_type="Details_Edited",
+            acc_num=f"{user.account_number.get_account_number()}",
+            acc_name=f"{user.first_name.title()} {user.last_name.title()}",
+        )
+            user.notifications.append(new_notification)
             print(prompts.UPDATE_SUCCESSFUL)
 
     def add_card(self,name=None):

@@ -71,7 +71,7 @@ UNKNOWN_TRANSACTION_ID = (
     f"\n{DASHES}ERROR:Transaction ID not found. Please try again.{DASHES}\n"
 )
 TRANSACTION_DETAILS = f"\n{DASHES}TRANSACTION DETAILS{DASHES}\n"
-SHOW_TRANS_DETAIL = "Transaction ID: {}\nDate: {}\nTime: {}\nType of\
+SHOW_TRANS_DETAIL = "Transaction ID: {}\nDate: {}\nTime: {}\nType of \
 Transaction: {}\n\nFunding Account Title: {}\nFunding Account Number\
 : {}\nBeneficiary Name: {}\nBeneficiary Account Number: {}\n\nTransaction Amount: {}\nBalance: {}\n"
 VIEW_TRANSACTIONS = f"\n{DASHES}VIEW YOUR ACCOUNT TRANSACTIONS{DASHES}\n"
@@ -86,3 +86,6 @@ SELECT_NOTIFICATION = "\nSelect a Notification to view its details:"
 NOTIFICATION_HEADING = "\nNo.       Notification ID   \t Date      Type"
 NOTIFICATION_DETAILS = f"\n{DASHES}NOTIFICATION DETAILS{DASHES}\n"
 NOTIFICATIONS_DELETED = f"\n{DASHES}ALL NOTIFICATIONS DELETED{DASHES}\n"
+UNREAD_NOTIFICATIONS = (
+    "\nYou have {} unread notifications. View notifications by pressing '9'.\n"
+)

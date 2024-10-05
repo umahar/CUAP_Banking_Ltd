@@ -74,6 +74,14 @@ class AccountFunctions:
                 balance=f"{user.balance.get_balance()}",
             )
             user.transactions.append(new_trans)
+            new_notification = Notification(
+                notification_type="Amount_Deposited",
+                acc_num=f"{user.account_number.get_account_number()}",
+                acc_name=f"{user.first_name.title()} {user.last_name.title()}",
+                amount=amount,
+                transaction_id=new_trans.trans_id,
+            )
+            user.notifications.append(new_notification)
             print(prompts.CURRENT_BALANCE.format(user.balance.get_balance()))
             print(prompts.DEPOSIT_SUCCESSFUL)
         else:
@@ -102,6 +110,14 @@ class AccountFunctions:
                     balance=f"{user.balance.get_balance()}",
                 )
                 user.transactions.append(new_trans)
+                new_notification = Notification(
+                    notification_type="Amount_Withdrawn",
+                    acc_num=f"{user.account_number.get_account_number()}",
+                    acc_name=f"{user.first_name.title()} {user.last_name.title()}",
+                    amount=amount,
+                    transaction_id=new_trans.trans_id,
+                )
+                user.notifications.append(new_notification)
                 print(prompts.WITHDRAW_SUCCESSFUL)
             else:
                 print(prompts.INSUFFICIENT_BALANCE)
@@ -114,6 +130,12 @@ class AccountFunctions:
         pin = UserInputHandler.get_valid_pin("Enter your current PIN Code: ")
         if Account.validate_pin(user.email, pin):
             Account.handle_edit(user, "pin", "Enter your new PIN Code: ")
+            new_notification = Notification(
+                notification_type="PIN_Changed",
+                acc_num=f"{user.account_number.get_account_number()}",
+                acc_name=f"{user.first_name.title()} {user.last_name.title()}",
+            )
+            user.notifications.append(new_notification)
         else:
             print(prompts.WRONG_PIN)
 
@@ -170,6 +192,14 @@ class AccountFunctions:
                     index = opt - 1
                     new_status = options[index]
                     response = card.change_card_status(new_status)
+                    new_notification = Notification(
+                        notification_type="Card_Status_Changed",
+                        acc_num=f"{user.account_number.get_account_number()}",
+                        acc_name=f"{user.first_name.title()} {user.last_name.title()}",
+                        card_new_status=card.card_status,
+                        card_num=card.card_number[-4:],
+                    )
+                    user.notifications.append(new_notification)
                     print(f"{prompts.DASHES}{response}{prompts.DASHES}")
                 else:
                     print(prompts.WRONG_PIN)
@@ -225,6 +255,14 @@ class AccountFunctions:
                             )
                             sender.transactions.append(s_new_trans)
                             receiver.balance.deposit(amount_to_send)
+                            new_notification_sender = Notification(
+                                notification_type="Amount_Debited",
+                                acc_num=f"{sender.account_number.get_account_number()}",
+                                acc_name=f"{sender.first_name.title()} {sender.last_name.title()}",
+                                amount=amount_to_send,
+                                transaction_id=s_new_trans.trans_id,
+                            )
+                            sender.notifications.append(new_notification_sender)
                             ##add trans to receiver
                             r_new_trans = Transaction(
                                 trans_type="Credit",
@@ -238,6 +276,14 @@ class AccountFunctions:
                                 balance=f"{receiver.balance.get_balance()}",
                             )
                             receiver.transactions.append(r_new_trans)
+                            new_notification_receiver = Notification(
+                                notification_type="Amount_Credited",
+                                acc_num=f"{receiver.account_number.get_account_number()}",
+                                acc_name=f"{receiver.first_name.title()} {receiver.last_name.title()}",
+                                amount=amount_to_send,
+                                transaction_id=r_new_trans.trans_id,
+                            )
+                            receiver.notifications.append(new_notification_receiver)
                             print(prompts.TRANSFER_COMPLETE)
                             print(
                                 prompts.CURRENT_BALANCE.format(
@@ -378,7 +424,7 @@ class AccountFunctions:
             print(prompts.INVALID_INPUT_TEXT)
 
     @staticmethod
-    def handle_bill_payment():
+    def handle_bill_payment(bill_id):
         """handles bill payment for user"""
         given_card_no = input("Enter your Card Number: ")
         given_card_name = input("Enter your Card Full Name: ")
@@ -417,6 +463,24 @@ class AccountFunctions:
                             balance=f"{user.balance.get_balance()}",
                         )
                         user.transactions.append(new_trans)
+                        new_notification_bill = Notification(
+                            notification_type="Bill_Paid",
+                            acc_num=f"{user.account_number.get_account_number()}",
+                            acc_name=f"{user.first_name.title()} {user.last_name.title()}",
+                            bill_id=bill_id,
+                            amount=5000,
+                            transaction_id=new_trans.trans_id,
+                        )
+                        user.notifications.append(new_notification_bill)
+                        new_notification_card = Notification(
+                            notification_type="Card_Used",
+                            acc_num=f"{user.account_number.get_account_number()}",
+                            acc_name=f"{user.first_name.title()} {user.last_name.title()}",
+                            card_num=given_card_no[-4],
+                            amount=5000,
+                            transaction_id=new_trans.trans_id,
+                        )
+                        user.notifications.append(new_notification_card)
                 else:
                     print(prompts.WRONG_PIN)
         else:
@@ -548,11 +612,11 @@ class AccountFunctions:
                     time=t_time,
                 )
                 user.transactions.append(old_transaction)
-        print("\n------------------- NOTIFICATIONS --------------------\n")
+        # print("\n------------------- NOTIFICATIONS --------------------\n")
         with open("data/notifications.txt", "r", encoding="UTF-8") as fp:
             lines = fp.readlines()
             for line in lines:
-                print(lines.index(line) + 1, ":", line, end="")
+                # print(lines.index(line) + 1, ":", line, end="")
                 dp = line.split()
                 acc_name = f"{dp[0]} {dp[1]}"
                 acc_num = dp[2]
