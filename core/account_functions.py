@@ -505,7 +505,7 @@ class AccountFunctions:
     def load_data():
         """this functions is called on the start of program and it loads
         all data saved in the file to a dict"""
-        print("\n------------------- USERS --------------------\n")
+        # print("\n------------------- USERS --------------------\n")
         with open("data/bill_ids.txt", "r", encoding="UTF-8") as fp:
             lines = fp.readlines()
             for line in lines:
@@ -513,7 +513,7 @@ class AccountFunctions:
         with open("data/user_accounts_data.txt", "r", encoding="UTF-8") as fp:
             lines = fp.readlines()
             for line in lines:
-                print(lines.index(line) + 1, ":", line, end="")
+                # print(lines.index(line) + 1, ":", line, end="")
                 dp = line.split()
                 email = dp[0]
                 first_name = dp[1]

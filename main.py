@@ -7,6 +7,7 @@ from core.account import Account
 from core.account_functions import AccountFunctions
 from core.notification import Notification
 from utils.input_handler import UserInputHandler
+from db.db_connection import create_connection
 
 
 def exit_program():
@@ -123,7 +124,11 @@ def display_login_menu(user):
 def main():
     """Main function to start the program"""
     AccountFunctions.load_data()
-    display_main_menu()
+    connection = create_connection()
+    if connection:
+        display_main_menu()
+    else:
+        exit_program()
 
 
 main()
