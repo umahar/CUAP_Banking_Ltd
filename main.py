@@ -7,7 +7,7 @@ from core.account import Account
 from core.account_functions import AccountFunctions
 from core.notification import Notification
 from utils.input_handler import UserInputHandler
-from db.db_connection import create_connection
+from db import db_queries
 
 
 def exit_program():
@@ -58,7 +58,8 @@ def handle_register():
 def handle_bill_payment():
     """function to allow user to pay bills without login"""
     bill_id = input("Enter your Bill ID: ")
-    if bill_id in Account.bill_ids:
+    result = db_queries.get_bill_id(bill_id)
+    if result:
         AccountFunctions.handle_bill_payment(bill_id)
     else:
         print(prompts.INVALID_BILL_ID)
@@ -124,11 +125,7 @@ def display_login_menu(user):
 def main():
     """Main function to start the program"""
     AccountFunctions.load_data()
-    connection = create_connection()
-    if connection:
-        display_main_menu()
-    else:
-        exit_program()
+    display_main_menu()
 
 
 main()

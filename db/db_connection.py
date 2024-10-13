@@ -15,10 +15,6 @@ def create_connection():
             password=config.PASSWORD,
             database=config.DATABASE,
         )
-        if connection.is_connected():
-            print(
-                "\n --------------- DATABASE CONNECTION SUCCESSFUL --------------- \n"
-            )
     except Error as e:
         print(
             f"\n --------------- ERROR: Database Connection Failed. {e}  --------------- \n"
